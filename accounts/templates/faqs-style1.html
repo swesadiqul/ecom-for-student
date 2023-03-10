@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+  
+{% endblock title %}
+
+
+
+{% block content %}
+<section class="faqs-style1 faq-page" style="margin-top: 70px;">
+    <div class="pageWrapper">
+        <!-- Body Content -->
+        <div id="page-content">
+            <!-- Page Title -->
+            <div class="page section-header text-center mb-0">
+                <div class="page-title">
+                    <div class="wrapper">
+                        <h1 class="page-width">FAQ's</h1>
+                    </div>
+                </div>
+            </div>
+            <!-- End Page Title -->
+            <!-- Breadcrumbs -->
+            <div class="bredcrumbWrap bredcrumbWrapPage bredcrumb-style2 text-center">
+                <div class="container breadcrumbs">
+                    <a href="index.html" title="Back to the home page">Home</a><span aria-hidden="true">|</span><span
+                        class="title-bold">FAQ's Style1</span>
+                </div>
+            </div>
+            <!-- End Breadcrumbs -->
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="accordion" id="accordionExample">
+                           {% for x in faqs %}
+                           <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                                    aria-controls="collapse{{ forloop.counter }}">{{ x.question }} ?</button>
+                            </h2>
+                            <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}"
+                                aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <p>{{ x.answer|safe }}</p>
+                                </div>
+                            </div>
+                        </div>
+                           {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- End Body Content -->
+    </div>
+</section>
+{% endblock content %}

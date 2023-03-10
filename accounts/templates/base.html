@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+{% load static %}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>
+        {% block title %}
+
+        {% endblock title %}
+    </title>
+    <meta name="description" content="description" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" />
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/plugins.css' %}" />
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}" />
+</head>
+
+<body class="template-index diva template-index-diva">
+    <!-- Page Loader -->
+    <!-- <div id="pre-loader"><img src="{% static 'assets/images/loader.gif' %}" alt="Loading..." /></div> -->
+    <!-- End Page Loader -->
+
+    <!-- Page Wrapper -->
+    <div class="pageWrapper">
+        <!-- Promotion Bar -->
+        <div class="notification-bar mobilehide d-none">
+            <a href="#" class="notification-bar__message">20% off your very first purchase, use promo code: diva
+                fashion</a>
+            <span class="close-announcement icon an an-times"></span>
+        </div>
+        <!-- End Promotion Bar -->
+
+        <!-- Search Form Drawer -->
+        {% include "include/search_form.html" %}
+        <!-- End Search Form Drawer -->
+
+        <!-- Main Header -->
+        {% include "include/main_header.html" %}
+        <!-- End Main Header -->
+
+        <!-- Mobile Menu -->
+        {% include "include/mobile_menu.html" %}
+        <!-- End Mobile Menu -->
+
+        <!-- Body Content -->
+        {% block content %}
+
+        {% endblock content %}
+        <!-- End Body Content -->
+
+        <!-- Footer -->
+        {% include "include/footer.html" %}
+        <!-- End Footer -->
+
+        <!-- Scoll Top -->
+        <div id="site-scroll"><i class="icon an an-angle-up"></i></div>
+        <!-- End Scoll Top -->
+
+        <!-- Minicart Drawer -->
+        {% include "include/minicart_drawer.html" %}
+        <!-- End Minicart Drawer -->
+
+        <!-- Addtocart Added Popup -->
+        {% include "include/addtocart_popup.html" %}
+        <!-- End Addtocart Added Popup -->
+
+        <!-- Quick View popup -->
+        {% include "include/quick_view_popup.html" %}
+        <!-- End Quick View Popup -->
+
+        <!-- Wishlist Added Popup -->
+        {% include "include/wishlist_popup.html" %}
+        <!-- End Wishlist Added Popup -->
+
+        <!-- Product Suggestion -->
+        {% include "include/product_suggestion.html" %}
+        <!-- End Product Suggestion -->
+
+        <!-- Newsletter Popup -->
+        {% include "include/newsletter.html" %}
+        <!-- End Newsletter Popup -->
+
+
+        <!-- Including Javascript -->
+        <!-- Plugins JS -->
+        <script src="{% static 'assets/js/plugins.js' %}"></script>
+        <!-- Main JS -->
+        <script src="{% static 'assets/js/main.js' %}"></script>
+        <!-- For Newsletter Popup -->
+
+        <script>
+            jQuery(document).ready(function () {
+                jQuery('.closepopup').click(function () {
+                    jQuery('#popup-container').fadeOut();
+                    jQuery('#modalOverly').fadeOut();
+                });
+
+                var visits = jQuery.cookie('visits') || 0;
+                visits++;
+                jQuery.cookie('visits', visits, { expires: 1, path: '/' });
+                console.debug(jQuery.cookie('visits'));
+                if (jQuery.cookie('visits') > 1) {
+                    jQuery('#modalOverly').hide();
+                    jQuery('#popup-container').hide();
+                } else {
+                    var pageHeight = jQuery(document).height();
+                    jQuery('<div id="modalOverly"></div>').insertBefore('body');
+                    jQuery('#modalOverly').css("height", pageHeight);
+                    jQuery('#popup-container').show();
+                }
+                if (jQuery.cookie('noShowWelcome')) {
+                    jQuery('#popup-container').hide();
+                    jQuery('#active-popup').hide();
+                }
+            });
+
+            jQuery(document).mouseup(function (e) {
+                var container = jQuery('#popup-container');
+                if (!container.is(e.target) && container.has(e.target).length === 0) {
+                    container.fadeOut();
+                    jQuery('#modalOverly').fadeIn(200);
+                    jQuery('#modalOverly').hide();
+                }
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- End For Newsletter Popup -->
+        <script>
+            {% if messages %}
+            {% for message in messages %}
+            const Toast = Swal.mixin({
+                toast: true,
+                height: 20,
+                padding: 0,
+                margin: 0.4,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: '{{ message.tags }}',
+                title: '{{ message }}'
+            })
+            {% endfor %}
+            {% endif %}
+        </script>
+    </div>
+    <!-- End Page Wrapper -->
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6407880a2e4829d0"></script>
+
+</body>
+
+</html>

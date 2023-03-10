@@ -1,0 +1,119 @@
+{% load static %}
+
+<footer id="footer">
+    <div class="site-footer">
+        <div class="footer-top">
+            <div class="container">
+                <!-- Footer Links -->
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3 footer-links">
+                        <h4 class="h4">Quick Links</h4>
+                        <ul>
+                            <li><a href="#">Women</a></li>
+                            <li><a href="#">Men</a></li>
+                            <li><a href="#">Kids</a></li>
+                            <li><a href="#">Deals</a></li>
+                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">New In</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3 footer-links">
+                        <h4 class="h4">Help</h4>
+                        <ul>
+                            <li><a href="{% url 'faq_list' %}">FAQ's</a></li>
+                            <li><a href="#">My Orders</a></li>
+                            <li><a href="#">Terms And Conditions</a></li>
+                            <li><a href="#">Shipping Policy</a></li>
+                            <li><a href="#">Returns &amp; Exchange</a></li>
+                            <li><a href="#">Ordering &amp; Payment</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3 contact-box">
+                        <h4 class="h4">Contact Us</h4>
+                        <ul class="addressFooter">
+                            <li>
+                                <i class="icon an an-map-marker"></i>
+                                <p>{{ info.location }}</p>
+                            </li>
+                            <li class="phone">
+                                <i class="icon an an-phone-volume"></i>
+                                <p><a href="tel:{{ info.phone_number }}">{{ info.phone_number }}</a></p>
+                            </li>
+                            <li class="email">
+                                <i class="icon an an-envelope"></i>
+                                <p><a href="mailto:{{ info.email }}">{{ info.email }}</a></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-3 newsletter">
+                        <div class="display-table">
+                            <div class="display-table-cell footer-newsletter">
+                                <form action="{% url 'subscribe' %}" method="post">
+                                    {% csrf_token %}
+                                    <label class="h4">Newsletter</label>
+                                    <p>sign up for newsletter to know our latest news and offers.</p>
+                                    <div class="input-group">
+                                        <!-- <input type="email" class="input-group__field newsletter__input" name="EMAIL" value="" placeholder="Email address" required /> -->
+                                        {{ subscribe.email }}
+                                        <span class="input-group__btn">
+                                            <button type="submit" class="btn newsletter__submit" name="commit" id="Subscribe"><span class="newsletter__submit-text--large">Sign Up</span></button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Footer Links -->
+        </div>
+
+        <div class="footer-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-Start align-items-center">
+                        <div class="footer-social w-100 text-start d-flex align-items-center">
+                            <h3 class="h4">Stay Connected</h3>
+                            <ul class="list--inline site-footer__social-icons social-icons">
+                                {% for x in social_media %}
+                                {% if x.media.name == "Facebook" %}
+                                <li><a class="social-icons__link d-inline-block" href="{{ x.link }}" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook"><i class="icon an an-facebook"></i></a></li>
+                                {% elif x.media.name == "Twitter" %}
+                                <li><a class="social-icons__link d-inline-block" href="{{ x.link }}" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter"><i class="icon an an-twitter"></i> <span class="icon__fallback-text">Twitter</span></a></li>
+                                {% elif x.media.name == "Pinterest" %}
+                                <li><a class="social-icons__link d-inline-block" href="{{ x.link }}" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Pinterest"><i class="icon an an-pinterest-p"></i> <span class="icon__fallback-text">Pinterest</span></a></li>
+                                {% elif x.media.name == "Instagram" %}
+                                <li><a class="social-icons__link d-inline-block" href="{{ x.link }}" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Instagram"><i class="icon an an-instagram"></i> <span class="icon__fallback-text">Instagram</span></a></li>
+                                {% else %}
+                                <li><a class="social-icons__link d-inline-block" href="{{ x.link }}" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="YouTube"><i class="icon an an-youtube"></i> <span class="icon__fallback-text">YouTube</span></a></li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <!--Footer Payment Icon-->
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-end align-items-center">
+                        <ul class="payment-icons list--inline w-100 justify-content-end text-end">
+                            <li><i class="icon an an-cc-visa" aria-hidden="true"></i></li>
+                            <li><i class="icon an an-cc-mastercard" aria-hidden="true"></i></li>
+                            <li><i class="icon an an-cc-amex" aria-hidden="true"></i></li>
+                            <li><i class="icon an an-cc-paypal" aria-hidden="true"></i></li>
+                            <li><i class="icon an an-cc-discover" aria-hidden="true"></i></li>
+                        </ul>
+                    </div>
+                    <!-- End Footer Payment Icon-->
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <!-- Footer Copyright -->
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 copyright text-center"><span>&copy; {% now "Y" %} E-commerce.</span> All Rights Reserved. Developed By Sadiqul Islam.</div>
+                    <!-- End Footer Copyright -->
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

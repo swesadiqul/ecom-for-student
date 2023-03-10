@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+E-commerce | Login
+{% endblock %}
+
+
+{% block content %}
+<section id="login" class="login" style="margin-top: 70px;">
+    <div class="page-template diva">
+        <div class="pageWrapper">
+            <!-- Body Content -->
+            <div id="page-content">
+                <!-- Page Title -->
+                <div class="page section-header text-center mb-0">
+                    <div class="page-title">
+                        <div class="wrapper">
+                            <h1 class="page-width">Login</h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Page Title -->
+                <!-- Breadcrumbs -->
+                <div class="bredcrumbWrap bredcrumbWrapPage bredcrumb-style2 text-center">
+                    <div class="container breadcrumbs">
+                        <a href="{% url 'home' %}" title="Back to the home page">Home</a><span
+                            aria-hidden="true">|</span><span class="title-bold">Login</span>
+                    </div>
+                </div>
+                <!-- End Breadcrumbs -->
+
+                <div class="container">
+                    <div class="row">
+                        <!-- Main Content -->
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 box mb-4 mb-md-0">
+                            <h3>New Customers</h3>
+                            <p>By creating an account with our store, you will be able to move through the checkout
+                                process faster, store multiple shipping addresses, view and track your orders in your
+                                account and more.</p>
+                            <a href="{% url 'register' %}" class="btn">Create an account</a>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 box">
+                            <div class="mb-4">
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                    <h3>Registered Customers</h3>
+                                    <p>If you have an account with us, please log in.</p>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                            {% csrf_token %}
+                                            {{ form }}
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="text-left col-12 col-sm-12 col-md-12 col-lg-12">
+                                            <input type="submit" class="btn mb-3" value="Sign In">
+                                            <p class="mb-4">
+                                                <a href="forgot-your-password.html">Forgot your password?</a> &nbsp; |
+                                                &nbsp;
+                                                <a href="{% url 'register' %}" id="customer_register_link">Create
+                                                    account</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- End Main Content -->
+                    </div>
+                </div>
+            </div>
+            <!-- End Body Content -->
+        </div>
+    </div>
+</section>
+{% endblock %}

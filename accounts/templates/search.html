@@ -1,0 +1,399 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Ecommerce | Blogs
+{% endblock %}
+
+
+{% block content %}
+<section id="blog_list" class="blog_list page-template template-blog diva" style="margin-top: 70px;">
+    <div class="pageWrapper">
+        <!-- Body Content -->
+        <div id="page-content">
+            <!-- Page Title -->
+            <div class="page section-header text-center mb-0">
+                <div class="page-title">
+                    <div class="wrapper">
+                        <h1 class="page-width">Blog Right Sidebar</h1>
+                    </div>
+                </div>
+            </div>
+            <!-- End Page Title -->
+    
+            <!-- Breadcrumbs -->
+            <div class="bredcrumbWrap bredcrumb-style2">
+                <div class="container breadcrumbs">
+                    <a href="index.html" title="Back to the home page">Home</a><span aria-hidden="true">|</span><span
+                        class="title-bold">Blog Right Sidebar</span>
+                </div>
+            </div>
+            <!-- End Breadcrumbs -->
+    
+            <div class="container">
+                <div class="row flex-column-reverse flex-md-row">
+                    <!-- Main Content -->
+                    <div class="col-12 col-sm-12 col-md-8 col-lg-9 main-col ">
+                        <!-- Blog Search -->
+                        <div class="custom-search pb-1">
+                            <form action="#" method="get" class="input-group search-header search" role="search"
+                                style="position: relative;">
+                                <input class="search-header__input search__input input-group__field" type="search" name="q"
+                                    placeholder="Blog Search..." aria-label="Search" autocomplete="off" />
+                                <span class="input-group__btn"><button class="btnSearch" type="submit"> <i
+                                            class="icon an an-search"></i></button></span>
+                            </form>
+                        </div>
+                        <!-- End Blog Search -->
+    
+                        <!-- Grid Article Posts -->
+                        <div class="blog--list-view">
+                            <div class="row">
+                                <!-- Article Posts -->
+                                {% for x in results %}
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 article">
+                                    <!-- Article Music -->
+                                    <img src="{{ x.thumbnail.url }}" alt="">
+                                    <!-- End Article Music -->
+                                    <!-- Blog Content -->
+                                    <h2 class="article__title h3 text-uppercase mb-1"><a href="blog-single-post.html">{{ x.title }}</a></h2>
+                                    <ul class="publish-detail rte mb-1">
+                                        <li><i class="icon an an-user me-1"></i>{{ x.author.first_name }} {{ x.author.last_name }}</li>
+                                        <li><i class="icon an an-clock me-1"></i> <time datetime="2018-02-12">{{ x.created_at|date }}</time></li>
+                                        <li class="d-none"><i class="icon an an-comments me-2"></i> <a
+                                                href="blog-single-post.html">1</a></li>
+                                    </ul>
+                                    <div class="rte mb-2 pb-1">
+                                        <p>{{ x.content|safe }}</p>
+                                    </div>
+                
+                                    <div class="blog-action"><a href="blog-single-post.html"
+                                            class="btn btn-secondary btn--small">Read more</a></div>
+                                    <!-- End Blog Content -->
+                                </div>
+                                {% endfor %}
+                                <!-- End Article Posts -->
+                            </div>
+    
+                            <hr />
+                            <div class="pagination">
+                                <ul>
+                                    <li class="prev"><a href="#"><i class="icon an an-angle-left align-baseline"
+                                                aria-hidden="true"></i></a></li>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li class="next"><a href="#"><i class="icon an an-angle-right align-baseline"
+                                                aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Grid Article Posts -->
+                    </div>
+                    <!-- End Main Content -->
+    
+                    <!-- Sidebar -->
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-3 blog-sidebar sidebar">
+                        <div class="sidebar_tags">
+                            <!-- Category -->
+                            <div class="sidebar_widget categories">
+                                <div class="widget-title">
+                                    <h2>Category</h2>
+                                </div>
+                                <div class="widget-content d-md-block">
+                                    <ul class="sidebar_categories">
+                                        <li class="lvl-1 "><a href="#" class="site-nav lvl-1">Fashion</a></li>
+                                        <li class="lvl-1 active"><a href="#" class="site-nav lvl-1">Life Style</a></li>
+                                        <li class="lvl-1 "><a href="#" class="site-nav lvl-1">Trending</a></li>
+                                        <li class="lvl-1 "><a href="#" class="site-nav lvl-1">Beauty</a></li>
+                                        <li class="lvl-1 "><a href="#" class="site-nav lvl-1">Summer</a></li>
+                                        <li class="lvl-1 "><a href="#" class="site-nav lvl-1">Winter</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Category -->
+                            <!-- Recent Posts -->
+                            <div class="sidebar_widget">
+                                <div class="widget-title">
+                                    <h2>Recent Posts</h2>
+                                </div>
+                                <div class="widget-content d-md-block">
+                                    <div class="list list-sidebar-products">
+                                        <div class="grid">
+                                            <div class="grid__item">
+                                                <div class="mini-list-item d-flex">
+                                                    <div class="mini-view_image"><a class="grid-view-item__link"
+                                                            href="#"><img class="grid-view-item__image blur-up lazyload"
+                                                                data-src="{% static 'assets/images/blog/blog-post-small-1.jpg' %}"
+                                                                src="{% static 'assets/images/blog/blog-post-small-1.jpg' %}"
+                                                                alt="Image" /></a></div>
+                                                    <div class="ms-3 details"> <a class="grid-view-item__title"
+                                                            href="#">Lorem Ipsum is simply dummy text</a>
+                                                        <div class="grid-view-item__meta"><span class="article__date"> <time
+                                                                    datetime="2018-02-12T09:23:00Z">February 12,
+                                                                    2018</time></span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="grid__item">
+                                                <div class="mini-list-item d-flex">
+                                                    <div class="mini-view_image"> <a class="grid-view-item__link"
+                                                            href="#"><img class="grid-view-item__image blur-up lazyload"
+                                                                data-src="{% static 'assets/images/blog/blog-post-small-2.jpg' %}"
+                                                                src="{% static 'assets/images/blog/blog-post-small-2.jpg' %}"
+                                                                alt="Image" /></a> </div>
+                                                    <div class="ms-3 details"> <a class="grid-view-item__title"
+                                                            href="#">Beatufiul stores are now easy to made!</a>
+                                                        <div class="grid-view-item__meta"><span class="article__date"> <time
+                                                                    datetime="2018-02-12T09:22:00Z">February 12,
+                                                                    2018</time></span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="grid__item">
+                                                <div class="mini-list-item d-flex">
+                                                    <div class="mini-view_image"> <a class="grid-view-item__link"
+                                                            href="#"><img class="grid-view-item__image blur-up lazyload"
+                                                                data-src="{% static 'assets/images/blog/blog-post-small-3.jpg' %}"
+                                                                src="{% static 'assets/images/blog/blog-post-small-3.jpg' %}"
+                                                                alt="Image" /></a> </div>
+                                                    <div class="ms-3 details"> <a class="grid-view-item__title"
+                                                            href="#">Great stores. Great choices.</a>
+                                                        <div class="grid-view-item__meta"><span class="article__date"> <time
+                                                                    datetime="2018-02-12T09:22:00Z">February 12,
+                                                                    2018</time></span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="grid__item">
+                                                <div class="mini-list-item d-flex">
+                                                    <div class="mini-view_image"> <a class="grid-view-item__link"
+                                                            href="#"><img class="grid-view-item__image blur-up lazyload"
+                                                                data-src="{% static 'assets/images/blog/blog-post-small-4.jpg' %}"
+                                                                src="{% static 'assets/images/blog/blog-post-small-4.jpg' %}"
+                                                                alt="Image" /></a> </div>
+                                                    <div class="ms-3 details"> <a class="grid-view-item__title" href="#">I
+                                                            must explain to you how all ideas</a>
+                                                        <div class="grid-view-item__meta"><span class="article__date"> <time
+                                                                    datetime="2018-02-12T09:22:00Z">February 12,
+                                                                    2018</time></span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Recent Posts -->
+                            <!-- Recent Comments -->
+                            <div class="sidebar_widget">
+                                <div class="widget-title">
+                                    <h2>Recent Comments</h2>
+                                </div>
+                                <div class="widget-content d-md-block">
+                                    <div class="list list-sidebar-products">
+                                        <div class="grid">
+                                            <div class="grid__item">
+                                                <div class="mini-list-item d-flex">
+                                                    <div class="mini-view_image"><a class="grid-view-item__link"
+                                                            href="blog-single-post.html"><img
+                                                                class="grid-view-item__image blur-up lazyload"
+                                                                data-src="{% static 'assets/images/blog/recent-commnet-img.jpg' %}"
+                                                                src="{% static 'assets/images/blog/recent-commnet-img.jpg' %}"
+                                                                alt="Image" /></a></div>
+                                                    <div class="ms-3 details">
+                                                        <div class="grid-view-item__meta"><strong>Diana</strong> On <a
+                                                                href="blog-single-post.html">Lorem Ipsum</a></div>
+                                                        <a class="grid-view-item__title" href="#">Lorem Ipsum is simply
+                                                            dummy text of the printing</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="grid__item">
+                                                <div class="mini-list-item d-flex">
+                                                    <div class="mini-view_image"> <a class="grid-view-item__link"
+                                                            href="blog-single-post.html"><img
+                                                                class="grid-view-item__image blur-up lazyload"
+                                                                data-src="{% static 'assets/images/blog/recent-commnet-img.jpg' %}"
+                                                                src="{% static 'assets/images/blog/recent-commnet-img.jpg' %}"
+                                                                alt="Image" /></a> </div>
+                                                    <div class="ms-3 details">
+                                                        <div class="grid-view-item__meta"><strong>Molly</strong> On <a
+                                                                href="blog-single-post.html">Lorem Ipsum</a></div>
+                                                        <a class="grid-view-item__title" href="#">Lorem Ipsum is simply
+                                                            dummy text of the printing</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="grid__item">
+                                                <div class="mini-list-item d-flex">
+                                                    <div class="mini-view_image"> <a class="grid-view-item__link"
+                                                            href="blog-single-post.html"><img
+                                                                class="grid-view-item__image blur-up lazyload"
+                                                                data-src="{% static 'assets/images/blog/recent-commnet-img.jpg' %}"
+                                                                src="{% static 'assets/images/blog/recent-commnet-img.jpg' %}"
+                                                                alt="Image" /></a> </div>
+                                                    <div class="ms-3 details">
+                                                        <div class="grid-view-item__meta"><strong>Rose</strong> On <a
+                                                                href="blog-single-post.html">Lorem Ipsum</a></div>
+                                                        <a class="grid-view-item__title" href="#">Lorem Ipsum is simply
+                                                            dummy text of the printing</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="grid__item">
+                                                <div class="mini-list-item d-flex">
+                                                    <div class="mini-view_image"> <a class="grid-view-item__link"
+                                                            href="blog-single-post.html"><img
+                                                                class="grid-view-item__image blur-up lazyload"
+                                                                data-src="{% static 'assets/images/blog/recent-commnet-img.jpg' %}"
+                                                                src="{% static 'assets/images/blog/recent-commnet-img.jpg"' %}
+                                                                alt="Image" /></a> </div>
+                                                    <div class="ms-3 details">
+                                                        <div class="grid-view-item__meta"><strong>Sophie</strong> On <a
+                                                                href="blog-single-post.html">Lorem Ipsum</a></div>
+                                                        <a class="grid-view-item__title" href="#">Lorem Ipsum is simply
+                                                            dummy text of the printing</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Recent Comments -->
+                            <!-- Tags Cloud -->
+                            <div class="sidebar_widget tags-clouds">
+                                <div class="widget-title">
+                                    <h2>Tags Cloud</h2>
+                                </div>
+                                <div class="widget-content d-md-block">
+                                    <ul>
+                                        <li><a href="#">Fashion</a></li>
+                                        <li><a href="#">Clothes</a></li>
+                                        <li><a href="#">Shoes</a></li>
+                                        <li><a href="#">Jeans</a></li>
+                                        <li><a href="#">Furniture</a></li>
+                                        <li><a href="#">Sun Glasses</a></li>
+                                        <li><a href="#">Winter</a></li>
+                                        <li><a href="#">Autoparts</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- End Tags Cloud -->
+                            <!-- Banner -->
+                            <div class="sidebar_widget static-banner pb-2 d-none d-md-block">
+                                <a href="collection-4columns.html"><img src="{% static 'assets/images/blog/blog-sidebar-banner.jpg"' %}
+                                        alt="Image"></a>
+                            </div>
+                            <!-- End Banner -->
+                            <!-- Trending Now -->
+                            <div class="sidebar_widget">
+                                <div class="widget-title">
+                                    <h2>Trending Now</h2>
+                                </div>
+                                <div class="widget-content d-md-block">
+                                    <div class="list list-sidebar-products">
+                                        <div class="grid">
+                                            <div class="grid__item">
+                                                <div class="mini-list-item d-flex">
+                                                    <div class="mini-view_image"><a class="grid-view-item__link"
+                                                            href="product-layout1.html"><img class="grid-view-item__image"
+                                                                src="{% static 'assets/images/product-images/product-image1.jpg' %}"
+                                                                alt="Image"></a></div>
+                                                    <div class="ms-3 details">
+                                                        <a class="grid-view-item__title" href="product-layout1.html">Edna
+                                                            Dress</a>
+                                                        <div class="grid-view-item__meta"><span
+                                                                class="product-price__price"><span
+                                                                    class="old-price">$500.00</span><span
+                                                                    class="money">$600.00</span></span></div>
+                                                        <div class="product-review justify-content-start">
+                                                            <i class="an an-star"></i>
+                                                            <i class="an an-star"></i>
+                                                            <i class="an an-star"></i>
+                                                            <i class="an an-star"></i>
+                                                            <i class="an an-star-half-alt"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="grid__item">
+                                                <div class="mini-list-item d-flex">
+                                                    <div class="mini-view_image"> <a class="grid-view-item__link"
+                                                            href="product-layout1.html"><img class="grid-view-item__image"
+                                                                src="{% static 'assets/images/product-images/product-image2.jpg' %}"
+                                                                alt="Image"></a> </div>
+                                                    <div class="ms-3 details"> <a class="grid-view-item__title"
+                                                            href="product-layout1.html">Elastic Waist Dress</a>
+                                                        <div class="grid-view-item__meta"><span
+                                                                class="product-price__price"><span
+                                                                    class="money">$748.00</span></span></div>
+                                                        <div class="product-review justify-content-start">
+                                                            <i class="an an-star"></i>
+                                                            <i class="an an-star"></i>
+                                                            <i class="an an-star"></i>
+                                                            <i class="an an-star"></i>
+                                                            <i class="an an-star"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="grid__item">
+                                                <div class="mini-list-item d-flex">
+                                                    <div class="mini-view_image"> <a class="grid-view-item__link"
+                                                            href="product-layout1.html"><img class="grid-view-item__image"
+                                                                src="{% static 'assets/images/product-images/product-image3.jpg' %}"
+                                                                alt="Image"></a> </div>
+                                                    <div class="ms-3 details"> <a class="grid-view-item__title"
+                                                            href="product-layout1.html">3/4 Sleeve Kimono Dress</a>
+                                                        <div class="grid-view-item__meta"><span
+                                                                class="product-price__price"><span
+                                                                    class="money">$550.00</span></span></div>
+                                                        <div class="product-review justify-content-start">
+                                                            <i class="an an-star"></i>
+                                                            <i class="an an-star"></i>
+                                                            <i class="an an-star"></i>
+                                                            <i class="an an-star"></i>
+                                                            <i class="an an-star-half-alt"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="grid__item">
+                                                <div class="mini-list-item d-flex">
+                                                    <div class="mini-view_image"> <a class="grid-view-item__link"
+                                                            href="product-layout1.html"><img class="grid-view-item__image"
+                                                                src="{% static 'assets/images/product-images/product-image4.jpg' %}"
+                                                                alt="Image"></a> </div>
+                                                    <div class="ms-3 details"> <a class="grid-view-item__title"
+                                                            href="product-layout1.html">Cape Dress</a>
+                                                        <div class="grid-view-item__meta"><span
+                                                                class="product-price__price"><span
+                                                                    class="old-price">$900.00</span><span
+                                                                    class="money">$788.00</span></span></div>
+                                                        <div class="product-review justify-content-start">
+                                                            <i class="an an-star"></i>
+                                                            <i class="an an-star"></i>
+                                                            <i class="an an-star"></i>
+                                                            <i class="an an-star"></i>
+                                                            <i class="an an-star-half-alt"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Trending Now -->
+                        </div>
+                    </div>
+                    <!-- End Sidebar -->
+                </div>
+            </div>
+        </div>
+        <!-- End Body Content -->
+    </div>
+</section>
+<!-- Page Wrapper -->
+{% endblock content %}

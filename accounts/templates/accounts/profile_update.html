@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<section id="profile-update" class="profile-update mt-5 py-5">
+    <div class="container">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Update Profile</button>
+        </form>
+    </div>
+</section>
+{% endblock content %}

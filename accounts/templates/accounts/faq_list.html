@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<section id="profile-update" class="profile-update mt-5 py-5">
+    <div class="container">
+       {% for x in faqs %}
+         <h2>{{ x.question }}</h2>
+         <p>{{ x.answer|safe }}</p>
+       {% endfor %}
+    </div>
+</section>
+{% endblock content %}
