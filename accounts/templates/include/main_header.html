@@ -1,5 +1,6 @@
 {% load static %}
 
+{% comment %}
 <div class="header-section classicHeader clearfix animated hdr-sticky">
     <!-- Desktop Header -->
     <div class="header-1 classic-style">
@@ -379,3 +380,302 @@
     </div>
     <!-- End Desktop Header -->
 </div>
+{% endcomment %}
+
+<!-- Main Header -->
+<div class="header-section clearfix animated hdr-sticky">
+    <!-- Desktop Header -->
+    <div class="header-8 classic-style">
+        <!-- Top Header -->
+        <div class="top-header d-lg-none">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-10 col-sm-8 col-md-7 col-lg-4">
+                        <div class="currency picker float-start">
+                            <select class="nice-select" name="currency">
+                                <option value="USD">USD</option>
+                                <option value="AUD">AUD</option>
+                                <option value="CAD">CAD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="GBP">GBP</option>
+                                <option value="INR">INR</option>
+                                <option value="JPY">JPY</option>
+                            </select>
+                        </div>
+                        <div class="language picker float-start">
+                            <select class="nice-select" name="language">
+                                <option value="EN">English</option>
+                                <option value="AR">Arabic</option>
+                                <option value="FR">French</option>
+                                <option value="DE">German</option>
+                                <option value="JA">Japanese</option>
+                                <option value="ES">Spanish</option>
+                            </select>
+                        </div>
+                        <p class="phone-no float-start"><i class="icon an an-phone me-1"></i><a href="tel:+4400(111)044833">+440 0(111) 044 833</a></p>
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-4 d-none d-md-none d-lg-block">
+                        <div class="text-center">
+                            <p class="top-header_middle-text transform-none">Free shipping on order over $50! Free return!</p>
+                        </div>
+                    </div>
+                    <div class="col-2 col-sm-4 col-md-5 col-lg-4 text-end d-none d-sm-block d-md-block d-lg-block">
+                        <div class="header-social">
+                            <ul class="justify-content-end list--inline social-icons">
+                                <li><a class="social-icons__link" href="#" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Facebook"><i class="icon an an-facebook"></i> <span class="icon__fallback-text">Facebook</span></a></li>
+                                <li><a class="social-icons__link" href="#" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Twitter"><i class="icon an an-twitter"></i> <span class="icon__fallback-text">Twitter</span></a></li>
+                                <li><a class="social-icons__link" href="#" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Pinterest"><i class="icon an an-pinterest-p"></i> <span class="icon__fallback-text">Pinterest</span></a></li>
+                                <li><a class="social-icons__link" href="#" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Instagram"><i class="icon an an-instagram"></i> <span class="icon__fallback-text">Instagram</span></a></li>
+                                <li><a class="social-icons__link" href="#" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" title="YouTube"><i class="icon icon an an-youtube"></i> <span class="icon__fallback-text">YouTube</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-2 col-sm-4 col-md-5 col-lg-4 text-end d-block d-sm-none d-md-none d-lg-none">
+                        <!-- Mobile User Links -->
+                        <div class="user-menu-dropdown">
+                            <span class="user-menu"><i class="an an-user-alt"></i></span>
+                            <ul class="customer-links list-inline" style="display:none;">
+                                {% if user.is_authenticated %}
+                                <li class="item"><a href="{% url 'logout' %}">Logout</a></li>
+                                <li class="item"><a href="#">Change Password</a></li>
+                                <li class="item"><a href="{% url 'profile' %}">Orders</a></li>
+                                <li class="item"><a href="#">Compare</a></li>
+                                {% else %}
+                                <li class="item"><a href="{% url 'login' %}">Login</a></li>
+                                <li class="item"><a href="{% url 'register' %}">Register</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <!-- End Mobile User Links -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Top Header -->
+
+        <!-- Header -->
+        <div class="header-wrap d-flex">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-4 col-sm-4 col-md-5 col-lg-4 d-block d-lg-none">
+                        <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Menu"><i class="icon an an-times"></i><i class="icon an an-bars"></i></button>
+                        <!-- Mobile Search -->
+                        <div class="site-header__search d-block d-lg-none mobile-search-icon">
+                            <button type="button" class="search-trigger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Search"><i class="icon an an-search"></i></button>
+                        </div>
+                        <!-- End Mobile Search -->
+                    </div>
+
+                    <!-- Desktop Logo -->
+                    <div class="logo col-4 col-sm-4 col-md-2 col-lg-4 col-xl-4 align-self-center">
+                        <a href="{% url 'home' %}"><img src="{% static 'assets/images/logo.png' %}" width="90" alt="Diva Multipurpose Html Template" title="Diva Multipurpose Html Template" /></a>
+                    </div>
+                    <!-- End Desktop Logo -->
+
+                    <!-- Search -->
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 main-search d-none d-lg-block">
+                        <div class="site-header__search search-bar-inline">
+                            <form action="#" class="search-bar__form d-flex position-relative">
+                                <input class="search__input" type="search" name="q" value="" placeholder="Search entire store..." aria-label="Search" autocomplete="off" />
+                                <button class="go-btn search__button" type="submit"><i class="icon an an-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- End Search -->
+
+                    <!-- Right Side -->
+                    <div class="col-4 col-sm-4 col-md-5 col-lg-4 col-xl-4">
+                        <div class="right-action d-flex-align-center justify-content-end">
+                            <!-- Search -->
+                            <div class="item site-header__search d-none d-lg-none">
+                                <button type="button" class="search-trigger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Search"><i class="icon an an-search"></i></button>
+                            </div>
+                            <!-- End Search -->
+                            <!-- User Links -->
+                            <div class="item user-menu-dropdown d-none d-sm-block d-md-block d-lg-block">
+                                <span class="user-menu" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Account"><i class="icon an an-user-alt"></i></span>
+                                <ul class="customer-links list-inline" style="display:none;">
+                                    {% if user.is_authenticated %}
+                                    <li class="item"><a href="{% url 'logout' %}">Logout</a></li>
+                                    <li class="item"><a href="#">Change Password</a></li>
+                                    <li class="item"><a href="{% url 'profile' %}">Orders</a></li>
+                                    <li class="item"><a href="#">Compare</a></li>
+                                    {% else %}
+                                    <li class="item"><a href="{% url 'login' %}">Login</a></li>
+                                    <li class="item"><a href="{% url 'register' %}">Register</a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            <!-- End User Links -->
+                            <!-- Wishlist -->
+                            <div class="item site-header-wishlist">
+                                <a href="wishlist.html" class="wishlist-trigger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Wishlist">
+                                    <i class="icon an an-heart"></i><span id="WishCount" class="site-header-wish-count">2</span>
+                                </a>
+                            </div>
+                            <!-- End Wishlist -->
+                            <!-- Minicart -->
+                            <div class="item site-cart" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cart">
+                                <a href="#" class="site-header__cart btn-minicart" data-bs-toggle="modal" data-bs-target="#minicart-drawer">
+                                    <i class="icon an an-shopping-bag"></i><span id="CartCount" class="site-header__cart-count">2</span>
+                                </a>  
+                            </div>
+                            <!-- End Minicart -->
+                        </div>
+                    </div>
+                    <!-- End Right Side -->
+                </div>
+            </div>
+        </div>
+        <!-- End Header -->
+
+        <!-- Desktop Navigation -->
+        <div class="main-navigation d-none d-lg-block">
+            <!-- Desktop Menu -->
+            <nav class="grid__item" id="AccessibleNav">
+                <div class="container">
+                    <ul id="siteNav" class="d-flex flex-wrap site-nav medium left hidearrow">
+                        <li class="lvl1 parent dropdown">
+                            <a href="#">Layout <i class="an an-angle-down"></i></a>
+                        </li>
+                        <li class="lvl1 parent megamenu">
+                            <a href="{% url 'shop' %}">Shop <i class="an an-angle-down"></i></a>
+                        </li>
+                        <li class="lvl1 parent megamenu">
+                            <a href="#">Features <i class="an an-angle-down"></i> <span class="navLbl">Hot</span></a>
+                            <div class="megamenu style2">
+                                <ul class="row mmWrapper">
+                                    <li class="lvl-1 col-md-3 col-lg-3">
+                                        <a href="#" class="site-nav lvl-1 menu-title">Product Page</a>
+                                        <ul class="subLinks">
+                                            <li class="lvl-2"><a href="product-layout1.html" class="site-nav">Product Layout1</a></li>
+                                            <li class="lvl-2"><a href="product-layout2.html" class="site-nav">Product Layout2</a></li>
+                                            <li class="lvl-2"><a href="product-layout3.html" class="site-nav">Product Layout3</a></li>
+                                            <li class="lvl-2"><a href="product-layout4.html" class="site-nav">Product Layout4</a></li>
+                                            <li class="lvl-2"><a href="product-layout5.html" class="site-nav">Product Layout5</a></li>
+                                            <li class="lvl-2"><a href="product-layout6.html" class="site-nav">Product Layout6</a></li>
+                                            <li class="lvl-2"><a href="product-layout7.html" class="site-nav">Product Layout7</a></li>
+                                            <li class="lvl-2"><a href="product-layout8.html" class="site-nav last">Product Layout8</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="lvl-1 col-md-3 col-lg-3">
+                                        <a href="#" class="site-nav lvl-1 menu-title">Product Types</a>
+                                        <ul class="subLinks">
+                                            <li class="lvl-2"><a href="product-accordian.html" class="site-nav">Product Accordian</a></li>
+                                            <li class="lvl-2"><a href="product-layout3.html" class="site-nav">Product Tabs Left</a></li>
+                                            <li class="lvl-2"><a href="product-layout6.html" class="site-nav">Product Tabs Center</a></li>
+                                            <li class="lvl-2"><a href="product-standard.html" class="site-nav">Standard Product</a></li>
+                                            <li class="lvl-2"><a href="product-variable.html" class="site-nav">Variable Product</a></li>
+                                            <li class="lvl-2"><a href="product-grouped.html" class="site-nav">Grouped Product</a></li>
+                                            <li class="lvl-2"><a href="product-pre-orders.html" class="site-nav">Product Pre-orders</a></li>
+                                            <li class="lvl-2"><a href="product-call-for-price.html" class="site-nav last">Product Call for Price</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="lvl-1 col-md-3 col-lg-3">
+                                        <a href="#" class="site-nav lvl-1 menu-title">Product Types</a>
+                                        <ul class="subLinks">
+                                            <li class="lvl-2"><a href="product-layout6.html" class="site-nav">Products Coundown</a></li>
+                                            <li class="lvl-2"><a href="product-layout1.html" class="site-nav">New Product</a></li>
+                                            <li class="lvl-2"><a href="product-layout2.html" class="site-nav">Sale Product</a></li>
+                                            <li class="lvl-2"><a href="product-outofstock.html" class="site-nav">Out Of Stock Product</a></li>
+                                            <li class="lvl-2"><a href="product-external-affiliate.html" class="site-nav">External / Affiliate Product</a></li>
+                                            <li class="lvl-2"><a href="product-layout1.html" class="site-nav">Variable Image</a></li>
+                                            <li class="lvl-2"><a href="product-layout3.html" class="site-nav">Variable Select</a></li>
+                                            <li class="lvl-2"><a href="product-360-degree-view.html" class="site-nav last">360 Degree view</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="lvl-1 col-md-3 col-lg-3"><a href="#" class="site-nav lvl-1 menu-title">Top Brands</a>
+                                        <div class="menu-brand-logo">
+                                            <a href="#"><img src="assets/images/logo/brandlogo1.png" alt="image"/></a>
+                                            <a href="#"><img src="assets/images/logo/brandlogo2.png" alt="image"/></a>
+                                            <a href="#"><img src="assets/images/logo/brandlogo3.png" alt="image"/></a>
+                                        </div>
+                                        <div class="menu-brand-logo">
+                                            <a href="#"><img src="assets/images/logo/brandlogo4.png" alt="image"/></a>
+                                            <a href="#"><img src="assets/images/logo/brandlogo5.png" alt="image"/></a>
+                                            <a href="#"><img src="assets/images/logo/brandlogo6.png" alt="image"/></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="lvl1 parent megamenu">
+                            <a href="#">Pages <i class="an an-angle-down"></i><span class="navLbl new">New</span></a>
+                            <div class="megamenu style2">
+                                <ul class="row mmWrapper">
+                                    <li class="col-12 menuCol">
+                                        <ul class="row">
+                                            <li class="lvl-1 col">
+                                                <a href="#" class="site-nav lvl-1">My Account</a>
+                                                <ul class="subLinks">
+                                                    <li><a href="{% url 'login' %}" class="site-nav">Login</a></li>
+                                                    <li><a href="{% url 'profile' %}" class="site-nav">My Account</a></li>
+                                                    <li><a href="{% url 'register' %}" class="site-nav">Register</a></li>
+                                                    <li><a href="#" class="site-nav">Forgot Password</a></li>
+                                                    <li><a href="#" class="site-nav last">Empty cart</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="lvl-1 col">
+                                                <a href="#" class="site-nav lvl-1">About Us</a>
+                                                <ul class="subLinks">
+                                                    <li><a href="about-us-style1.html" class="site-nav">About Us 01</a></li>
+                                                    <li><a href="about-us-style2.html" class="site-nav">About Us 02</a></li>
+                                                    <li><a href="about-us-style3.html" class="site-nav">About Us 03</a></li>
+                                                    <li><a href="cms-page.html" class="site-nav">CMS Page</a></li>
+                                                    <li><a href="empty-category.html" class="site-nav last">Empty category</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="lvl-1 col">
+                                                <a href="#" class="site-nav lvl-1">Others Pages</a>
+                                                <ul class="subLinks">
+                                                    <li><a href="contactus-style1.html" class="site-nav">Contact Us 01</a></li>
+                                                    <li><a href="contactus-style2.html" class="site-nav">Contact Us 02</a></li>
+                                                    <li><a href="faqs-style1.html" class="site-nav">FAQs 01</a></li>
+                                                    <li><a href="faqs-style2.html" class="site-nav">FAQs 02</a></li>
+                                                    <li><a href="empty-compare.html" class="site-nav last">Empty compare</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="lvl-1 col">
+                                                <a href="#" class="site-nav lvl-1">Others Pages</a>
+                                                <ul class="subLinks">
+                                                    <li><a href="404.html" class="site-nav">404 Error</a></li>
+                                                    <li><a href="size-guide.html" class="site-nav">Size Guide</a></li>
+                                                    <li><a href="privacy-policy.html" class="site-nav">Privacy Policy</a></li>
+                                                    <li><a href="brands-page.html" class="site-nav">Brands Page</a></li>
+                                                    <li><a href="empty-search.html" class="site-nav last">Empty search</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="lvl-1 col">
+                                                <a href="#" class="site-nav  lvl-1">Others Pages</a>
+                                                <ul>
+                                                    <li><a href="coming-soon-style1.html" class="site-nav">Coming soon 01</a></li>
+                                                    <li><a href="coming-soon-style2.html" class="site-nav">Coming soon 02</a></li>
+                                                    <li><a href="coming-soon-style3.html" class="site-nav">Coming soon 03</a></li>
+                                                    <li><a href="coming-soon-style4.html" class="site-nav">Coming soon 04</a></li>
+                                                    <li><a href="empty-wishlist.html" class="site-nav last">Empty wishlist</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="col-12 imageCol">
+                                        <a href="#"><img src="{% static 'assets/images/megamenu/megamenu-bg4.jpg' %}" alt="image" /></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="lvl1 parent dropdown">
+                            <a href="{% url 'lookbook' %}">Lookbook <i class="an an-angle-down"></i></a>
+                        </li>
+                        <li class="lvl1 parent dropdown">
+                            <a href="{% url 'blog_list' %}">Blog <i class="an an-angle-down"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- End Desktop Menu -->
+        </div>
+        <!-- End Desktop Navigation -->
+    </div>
+    <!-- End Desktop Header -->
+</div>
+<!-- End Main Header -->

@@ -34,14 +34,6 @@ class UserRegistrationForm(UserCreationForm):
         # }
 
 
-
-class UserLoginForm(AuthenticationForm):
-    # email = forms.EmailField(label='Email', max_length=254, widget=forms.EmailInput(attrs={'class': 'form-control'}))
-    # password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    pass
-
-
-
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = Profile

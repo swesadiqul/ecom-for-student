@@ -9,6 +9,7 @@ from django.views.generic import ListView
 from django.views.generic.edit import UpdateView
 from .models import *
 from django.db.models import Q
+from django.contrib.auth.forms import AuthenticationForm
 
 
 # Create your views here.
@@ -31,15 +32,16 @@ def register(request):
 
 def user_login(request):
     if request.method == 'POST':
-        form = UserLoginForm(data=request.POST)
+        form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
             messages.success(request, 'User successfully login.')
             return redirect('profile')
     else:
-        form = UserLoginForm()
+        form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
+
 
 @login_required
 def user_logout(request):
@@ -47,10 +49,14 @@ def user_logout(request):
     return redirect('home')
 
 
+def forgot_password(request):
+    return render(request, 'forgot-your-password.html')
+
+
 # def blog_list(request):
 #     return render(request, 'blog-right-sidebar.html')
 
-@login_required
+# @login_required
 def user_profile(request):
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES)
@@ -90,12 +96,10 @@ class FAQListView(ListView):
     context_object_name = 'faqs'
 
 
-
 class PostListView(ListView):
     model = Post
     template_name = "blog-right-sidebar.html"
     context_object_name = 'posts'
-
 
 
 def search(request):        
@@ -109,3 +113,11 @@ def search(request):
 
     else:
         return render(request,"search.html",{})
+    
+
+def shop(request):
+    return render(request, 'shop-left-sidebar.html')
+
+
+def lookbook(request):
+    return render(request, 'lookbook-3columns.html')

@@ -9,11 +9,11 @@
 
 {% block content %}
 <section class="page-template diva">
-    <div class="pageWrapper mt-5">
+    <div class="pageWrapper">
         <!-- Body Content -->
         <div id="page-content">
             <!-- Page Title -->
-            <div class="page section-header text-center mb-0" style="margin-top: 70px;">
+            <div class="page section-header text-center mb-0">
                 <div class="page-title">
                     <div class="wrapper">
                         <h1 class="page-width">My Account</h1>
@@ -23,7 +23,7 @@
             <!-- End Page Title -->
             <div class="bredcrumbWrap bredcrumbWrapPage bredcrumb-style2 text-center">
                 <div class="container breadcrumbs">
-                    <a href="index.html" title="Back to the home page">Home</a><span aria-hidden="true">|</span><span
+                    <a href="{% url 'home' %}" title="Back to the home page">Home</a><span aria-hidden="true">|</span><span
                         class="title-bold">My Account</span>
                 </div>
             </div>
