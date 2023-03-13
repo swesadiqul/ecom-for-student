@@ -20,6 +20,7 @@ urlpatterns = [
     path('<pk>/update', views.UserProfileUpdateView.as_view(), name='update_profile'), 
     path('search/', views.search, name='search'), 
     path('shop/', views.shop, name='shop'), 
+    path('product-details/', views.product_details, name='product_details'), 
     path('lookbook/', views.lookbook, name='lookbook'), 
 
 ]

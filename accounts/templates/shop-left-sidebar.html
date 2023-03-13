@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 
 {% block title %}
   
@@ -15,8 +15,8 @@
             <!-- Collection Banner -->
             <div class="collection-header">
                 <div class="collection-hero">
-                    <div class="collection-hero__image blur-up lazyload" style="background-image:url('assets/images/collection/women-collection-bnr.jpg');"></div>
-                    <div class="collection-hero__title-wrapper"><h1 class="collection-hero__title page-width">Shop Left Sidebar</h1></div>
+                    <div class="collection-hero__image blur-up lazyload" style="background-image:url('{% static 'assets/images/collection/women-collection-bnr.jpg' %}');"></div>
+                    <div class="collection-hero__title-wrapper"><h1 class="collection-hero__title page-width">Shop Now</h1></div>
                 </div>
                 <div class="collection-description container">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
             </div>
@@ -609,12 +609,12 @@
                                         <!-- Product Image -->
                                         <div class="product-image">
                                             <!-- Product Image -->
-                                            <a href="product-layout1.html">
+                                            <a href="{% url 'product_details' %}">
                                                 <!-- Image -->
-                                                <img class="primary blur-up lazyload" data-src="assets/images/product-images/product-image1.jpg" src="assets/images/product-images/product-image1.jpg" alt="image" title="product" />
+                                                <img class="primary blur-up lazyload" data-src="{% static 'assets/images/product-images/product-image1.jpg' %}" src="{% static 'assets/images/product-images/product-image1.jpg' %}" alt="image" title="product" />
                                                 <!-- End Image -->
                                                 <!-- Hover Image -->
-                                                <img class="hover blur-up lazyload" data-src="assets/images/product-images/product-image1-1.jpg" src="assets/images/product-images/product-image1-1.jpg" alt="image" title="product" />
+                                                <img class="hover blur-up lazyload" data-src="{% static 'assets/images/product-images/product-image1-1.jpg' %}" src="{% static 'assets/images/product-images/product-image1-1.jpg' %}" alt="image" title="product" />
                                                 <!-- End Hover Image -->
                                                 <!-- Product Label -->
                                                 <div class="product-labels rectangular"><span class="lbl on-sale">Exclusive</span></div>

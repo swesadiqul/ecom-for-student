@@ -119,5 +119,9 @@ def shop(request):
     return render(request, 'shop-left-sidebar.html')
 
 
+def product_details(request):
+    return render(request, 'product-layout1.html')
+
+
 def lookbook(request):
     return render(request, 'lookbook-3columns.html')
