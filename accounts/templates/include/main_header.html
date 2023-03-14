@@ -88,7 +88,7 @@
                     </div>
                     <!-- Desktop Logo -->
                     <div class="logo col-4 col-sm-4 col-md-4 col-lg-2 align-self-center">
-                        <a href="{% url 'home' %}"><img src="{% static 'assets/images/logo.png' %}" alt="Diva Multipurpose Html Template" title="Diva Multipurpose Html Template" /></a>
+                        <a href="{% url 'home' %}"><img src="{{ siteLogo.image.url }}" alt="Logo" title="Logo" /></a>
                     </div>
                     <!-- End Desktop Logo -->
                     <!-- Desktop Navigation -->
@@ -468,7 +468,7 @@
 
                     <!-- Desktop Logo -->
                     <div class="logo col-4 col-sm-4 col-md-2 col-lg-4 col-xl-4 align-self-center">
-                        <a href="{% url 'home' %}"><img src="{% static 'assets/images/logo.png' %}" width="90" alt="Diva Multipurpose Html Template" title="Diva Multipurpose Html Template" /></a>
+                        <a href="{% url 'home' %}"><img src="{{ siteLogo.image.url }}" width="90" alt="{{ siteLogo.title }}" title="{{ siteLogo.title }}" /></a>
                     </div>
                     <!-- End Desktop Logo -->
 

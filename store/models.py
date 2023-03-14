@@ -7,14 +7,18 @@ import string, random
 from django.db import IntegrityError
 from ckeditor.fields import RichTextField
 from django.utils import timezone
+from PIL import Image
 
 # Create your models here.
 class SiteLogo(models.Model):
-    name = models.CharField(max_length=120)
-    image = models.ImageField(upload_to='siteLogo',)
+    title = models.CharField(max_length=120)
+    image = models.ImageField(upload_to='siteLogo')
 
     def __str__(self):
-        return self.name
+        return self.title
+    
+    class Meta:
+        verbose_name_plural = "Site Logo"
     
 
 class ProductCategory(models.Model):
@@ -36,6 +40,9 @@ class ProductCategory(models.Model):
 
     def get_category_update_url(self):
         return reverse('category-update', kwargs={'slug': self.slug})
+    
+    class Meta:
+        verbose_name_plural = "Product Category"
 
 class Brand(models.Model):
     name = models.CharField(max_length=50)
@@ -79,24 +86,23 @@ class PriceRange(models.Model):
 
 class Product(models.Model):
     product_name = models.CharField(max_length=100)
-    product_code = models.CharField(max_length = 150)
+    product_code = models.CharField(max_length=150)
     slug = models.SlugField(max_length=100, blank=True, null=True, unique=True)  
     categoris = models.ForeignKey(ProductCategory, verbose_name='Product Category', on_delete=models.CASCADE, blank=True, null=True)
-    image = models.ImageField(upload_to='productImg', default='ProductImg/noimg.jpg')
+    image = models.ImageField(upload_to='productImg')
     hover_image = models.ImageField(upload_to='ProductImg', default='noimg.jpg', blank=True, null=True)
     regular_price = models.IntegerField()
     discount_price = models.IntegerField(blank=True, null=True)
     product_purchase_price = models.IntegerField()
     sort_discription = RichTextField(blank=True, null=True)
     details = RichTextUploadingField()
-    shipping_and_return = RichTextUploadingField()
+    shipping_and_return = RichTextUploadingField(blank=True, null=True)
     size_chart = RichTextField(blank=True, null=True)
     stock_quantity = models.PositiveIntegerField()
     show_status  = models.BooleanField(default=False)
-    product_label = models.CharField(max_length=255, )
-    flash_sale_add_and_expire_date = models.DateTimeField(blank=True, null=True)
+    product_label = models.CharField(max_length=255, blank=True, null=True)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, blank=True, null=True)
-    price_range =models.ForeignKey(PriceRange, on_delete=models.CASCADE, blank=True, null=True)
+    price_range = models.ForeignKey(PriceRange, on_delete=models.CASCADE, blank=True, null=True)
     meta_title = models.CharField(blank=True, null=True, max_length=100)
     availability = models.CharField(blank=True, null=True, max_length=120)
     rating = models.CharField(blank=True, null=True, max_length=120)
@@ -454,31 +460,31 @@ class TermsAndConditions(models.Model):
     def __str__(self):
         return 'Terms And Conditions'
 
-class  Mission(models.Model):
+class Mission(models.Model):
     all_information = RichTextField()
 
     def __str__(self):
         return 'Mission'
 
-class  Vision(models.Model):
+class Vision(models.Model):
     all_information = RichTextField()
 
     def __str__(self):
         return 'Vision'
 
-class  Returns_Policy(models.Model):
+class Returns_Policy(models.Model):
     all_information = RichTextField()
 
     def __str__(self):
         return 'Returns Policy'
 
-class  ShippingAndDelivery(models.Model):
+class ShippingAndDelivery(models.Model):
     all_information = RichTextField()
 
     def __str__(self):
         return 'Shipping And Delivery'
 
-class  AboutUs(models.Model):
+class AboutUs(models.Model):
     all_information = RichTextField()
 
     def __str__(self):

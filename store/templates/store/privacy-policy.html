@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+  
+{% endblock title %}
+
+
+{% block content %}
+<section class="page-template diva">
+    <div class="pageWrapper">
+        <!-- Body Content -->
+        <div id="page-content">
+            <!-- Page Title -->
+            <div class="page section-header text-center">
+                <div class="page-title">
+                    <div class="wrapper"><h1 class="page-title">Privacy Policy</h1></div>
+                </div>
+            </div>
+            <!-- End Page Title -->
+
+            <div class="container text-content">
+                {{ privacy_policy.all_information|safe }}
+            </div>
+        </div>
+        <!-- End Body Content -->
+    </div>
+</section>
+{% endblock content %}

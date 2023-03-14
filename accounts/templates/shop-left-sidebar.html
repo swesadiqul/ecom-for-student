@@ -33,6 +33,16 @@
                                 <div class="widget-title"><h2>Categories</h2></div>
                                 <div class="widget-content">
                                     <ul class="sidebar_categories">
+                                        {% for c in categories %}
+                                        <!-- {% if c.children %}
+                                        <li class="lvl-1"><a href="#" class="site-nav">{{ c.parent }}</a></li>
+                                        {% else %} -->
+                                        <li class="lvl-1"><a href="#" class="site-nav">{{ c.category_name }}</a></li>
+                                        <!-- {% endif %} -->
+                                        {% endfor %}
+                                       
+
+                                        {% comment %}
                                         <li class="level1 sub-level"><a href="#;" class="site-nav">Clothing</a>
                                             <ul class="sublinks" style="display: none;">
                                                 <li class="level2"><a href="#" class="site-nav">Men</a></li>
@@ -54,6 +64,7 @@
                                         <li class="lvl-1"><a href="#" class="site-nav">Collections</a></li>
                                         <li class="lvl-1"><a href="#" class="site-nav">Sale</a></li>
                                         <li class="lvl-1"><a href="#" class="site-nav">Page</a></li>
+                                        {% endcomment %}
                                     </ul>
                                 </div>
                             </div>

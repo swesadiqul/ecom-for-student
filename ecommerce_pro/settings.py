@@ -59,6 +59,7 @@ TEMPLATES = [
                 'accounts.context_processors.subscribe',
                 'accounts.context_processors.socialAccount',
                 'accounts.context_processors.contactInfo',
+                'accounts.context_processors.siteLogo',
             ],
         },
     },

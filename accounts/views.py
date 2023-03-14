@@ -10,11 +10,18 @@ from django.views.generic.edit import UpdateView
 from .models import *
 from django.db.models import Q
 from django.contrib.auth.forms import AuthenticationForm
+from store.models import SiteLogo, Banner, ProductCategory
 
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    logo = SiteLogo.objects.first()
+    banners = Banner.objects.all()[:4]
+    context = {
+        'logo':logo,
+        'banners':banners
+    }
+    return render(request, 'index.html', context)
 
 
 def register(request):
@@ -116,7 +123,11 @@ def search(request):
     
 
 def shop(request):
-    return render(request, 'shop-left-sidebar.html')
+    categories = ProductCategory.objects.all()
+    context = {
+        'categories': categories
+    }
+    return render(request, 'shop-left-sidebar.html', context)
 
 
 def product_details(request):

@@ -1,6 +1,7 @@
 from .forms import *
 from django.shortcuts import redirect
 from django.contrib import messages
+from store.models import SiteLogo
 
 def subscribe(request):
     if request.method == 'POST':
@@ -21,3 +22,7 @@ def socialAccount(request):
 
 def contactInfo(request):
     return {'info': ContactInformation.objects.first()}
+
+
+def siteLogo(request):
+    return {'siteLogo': SiteLogo.objects.last()}
