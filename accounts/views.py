@@ -10,7 +10,7 @@ from django.views.generic.edit import UpdateView
 from .models import *
 from django.db.models import Q
 from django.contrib.auth.forms import AuthenticationForm
-from store.models import SiteLogo, Banner, ProductCategory
+from store.models import SiteLogo, Banner, ProductCategory, Product
 
 
 # Create your views here.
@@ -124,14 +124,20 @@ def search(request):
 
 def shop(request):
     categories = ProductCategory.objects.all()
+    products = Product.objects.all()
     context = {
-        'categories': categories
+        'categories': categories,
+        'products': products
     }
-    return render(request, 'shop-left-sidebar.html', context)
+    return render(request, 'shops.html', context)
 
 
-def product_details(request):
-    return render(request, 'product-layout1.html')
+def product_details(request, id):
+    product = Product.objects.get(id=id)
+    context = {
+        'product': product,
+    }
+    return render(request, 'product-details.html', context)
 
 
 def lookbook(request):
