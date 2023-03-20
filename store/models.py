@@ -85,44 +85,28 @@ class PriceRange(models.Model):
         return self.price_range
 
 class Product(models.Model):
-    product_name = models.CharField(max_length=100)
-    product_code = models.CharField(max_length=150)
-    slug = models.SlugField(max_length=100, blank=True, null=True, unique=True)  
+    name = models.CharField(max_length=100)  
     categoris = models.ForeignKey(ProductCategory, verbose_name='Product Category', on_delete=models.CASCADE, blank=True, null=True)
     image = models.ImageField(upload_to='productImg')
-    hover_image = models.ImageField(upload_to='ProductImg', default='noimg.jpg', blank=True, null=True)
+    hover_image = models.ImageField(upload_to="hoverProductImage", default="https://th.bing.com/th/id/OIP.oWPLGwKQFynuDWH43wlwgAHaLH?w=215&h=322&c=7&o=5&pid=1.7")
     regular_price = models.IntegerField()
     discount_price = models.IntegerField(blank=True, null=True)
-    product_purchase_price = models.IntegerField()
-    sort_discription = RichTextField(blank=True, null=True)
     details = RichTextUploadingField()
-    shipping_and_return = RichTextUploadingField(blank=True, null=True)
-    size_chart = RichTextField(blank=True, null=True)
-    stock_quantity = models.PositiveIntegerField()
-    show_status  = models.BooleanField(default=False)
-    product_label = models.CharField(max_length=255, blank=True, null=True)
+    stock_quantity = models.PositiveIntegerField(default=0)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, blank=True, null=True)
-    price_range = models.ForeignKey(PriceRange, on_delete=models.CASCADE, blank=True, null=True)
-    meta_title = models.CharField(blank=True, null=True, max_length=100)
-    availability = models.CharField(blank=True, null=True, max_length=120)
-    rating = models.CharField(blank=True, null=True, max_length=120)
-    tax = models.CharField(blank=True, null=True, max_length=120)
     
     def saving_price(self):
         return self.price  - self.discount_price
-
-    def saving_percent(self):
-        return self.saving_price() / self.price  * 100
         
     def __str__(self):
-        return self.product_name
+        return self.name
 
     class Meta:
         ordering = ['-id']
     
     def save(self, *args, **kwargs):
         try:
-            self.slug =''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(49))
+            # self.slug =''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(49))
             
             super().save(*args, **kwargs)
             # super().save()  # saving image first
@@ -138,41 +122,41 @@ class Product(models.Model):
             
       
 
-    def get_absolute_url(self):
-        return reverse('product-detail', kwargs={'slug': self.slug})
+    # def get_absolute_url(self):
+    #     return reverse('product-detail', kwargs={'slug': self.slug})
 
-    def get_product_update_url(self):
-        return reverse('product-update', kwargs={'slug': self.slug})
+    # def get_product_update_url(self):
+    #     return reverse('product-update', kwargs={'slug': self.slug})
 
-    def get_remove_from_cart_url(self):
-        return reverse('remove-form-cart', kwargs={
-            'slug': self.slug
-        })
+    # def get_remove_from_cart_url(self):
+    #     return reverse('remove-form-cart', kwargs={
+    #         'slug': self.slug
+    #     })
 
-    def get_add_to_cart_url(self):
-        return reverse('add-to-cart', kwargs={'slug': self.slug})
+    # def get_add_to_cart_url(self):
+    #     return reverse('add-to-cart', kwargs={'slug': self.slug})
 
-    def get_buy_now_url(self):
-        return reverse('buy-now', kwargs={'slug': self.slug})
+    # def get_buy_now_url(self):
+    #     return reverse('buy-now', kwargs={'slug': self.slug})
 
 
-    def get_review_list(self):
-        reviews = ProductReview.objects.filter(product=self,approve_status=True)
-        return reviews
+    # def get_review_list(self):
+    #     reviews = ProductReview.objects.filter(product=self,approve_status=True)
+    #     return reviews
 
-    def get_avg_rating(self):
-        reviews = ProductReview.objects.filter(product=self,approve_status=True)
-        count = len(reviews)
-        sum = 0
-        for rvw in reviews:
-            sum += rvw.rating
-        if count != 0:
-            return (sum*20/count)
+    # def get_avg_rating(self):
+    #     reviews = ProductReview.objects.filter(product=self,approve_status=True)
+    #     count = len(reviews)
+    #     sum = 0
+    #     for rvw in reviews:
+    #         sum += rvw.rating
+    #     if count != 0:
+    #         return (sum*20/count)
 
-    def get_rating_count(self):
-        reviews = ProductReview.objects.filter(product=self,approve_status=True)
-        count = len(reviews)
-        return count
+    # def get_rating_count(self):
+    #     reviews = ProductReview.objects.filter(product=self,approve_status=True)
+    #     count = len(reviews)
+    #     return count
 
 class ProductImgGallery(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

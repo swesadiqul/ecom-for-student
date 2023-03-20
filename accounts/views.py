@@ -17,9 +17,13 @@ from store.models import SiteLogo, Banner, ProductCategory, Product
 def index(request):
     logo = SiteLogo.objects.first()
     banners = Banner.objects.all()[:4]
+    categories = ProductCategory.objects.filter(parent=None)
+    for x in categories:
+        print(x)
     context = {
-        'logo':logo,
-        'banners':banners
+        'logo': logo,
+        'banners': banners,
+        'categories': categories,
     }
     return render(request, 'index.html', context)
 
@@ -123,7 +127,7 @@ def search(request):
     
 
 def shop(request):
-    categories = ProductCategory.objects.all()
+    categories = ProductCategory.objects.filter(parent=None)
     products = Product.objects.all()
     context = {
         'categories': categories,

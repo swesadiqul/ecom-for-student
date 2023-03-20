@@ -1119,20 +1119,26 @@ Ecommerce | Home
     </div>
     <!-- End Custom Content -->
 
+
+
     <!-- Collection Box slider -->
     <div class="collection-box section">
         <div class="container-fluid">
             <div class="collection-grid-4item">
+                {% for c in categories %}
                 <div class="collection-grid-item">
-                    <img data-src="{% static 'assets/images/collection/shoes.jpg' %}" src="{% static 'assets/images/collection/shoes.jpg' %}" alt="Shoes" class="blur-up lazyload" />
+                    {% if c.img %}
+                    <img data-src="{{ c.img.url }}" src="{{ c.img.url }}" alt="Shoes" class="blur-up lazyload" />
+                    {% endif %}
                     <a href="collection-3columns.html" class="collection-grid-item__title-wrapper">
                         <div class="title-wrapper">
-                            <h3 class="collection-grid-item__title">Shoes</h3>
-                            <span class="btn btn--secondary border-btn-1">Shop Shoes</span>
+                            <h3 class="collection-grid-item__title">{{ c.category_name }}</h3>
+                            <span class="btn btn--secondary border-btn-1">Shop {{ c.category_name }}</span>
                         </div>
                     </a>
                 </div>
-                <div class="collection-grid-item">
+                {% endfor %}
+                <!-- <div class="collection-grid-item">
                     <img data-src="{% static 'assets/images/collection/sunglasses.jpg' %}" src="{% static 'assets/images/collection/sunglasses.jpg' %}" alt="sunglasses" class="blur-up lazyload" />
                     <a href="collection-3columns.html" class="collection-grid-item__title-wrapper">
                         <div class="title-wrapper">
@@ -1158,7 +1164,7 @@ Ecommerce | Home
                             <span class="btn btn--secondary border-btn-1">Shop Dresses</span>
                         </div>
                     </a>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

@@ -33,11 +33,17 @@
                                 <div class="widget-content">
                                     <ul class="sidebar_categories">
                                         {% for c in categories %}
-                                        <!-- {% if c.children %}
-                                        <li class="lvl-1"><a href="#" class="site-nav">{{ c.parent }}</a></li>
-                                        {% else %} -->
+                                        {% if not c.children.all %}
                                         <li class="lvl-1"><a href="#" class="site-nav">{{ c.category_name }}</a></li>
-                                        <!-- {% endif %} -->
+                                        {% else %}
+                                        <li class="level1 sub-level"><a href="#;" class="site-nav">{{ c.category_name }}</a>
+                                            <ul class="sublinks" style="display: none;">
+                                                {% for child in c.children.all %}
+                                                <li class="level2"><a href="#" class="site-nav">{{ child.category_name }}</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                        {% endif %}
                                         {% endfor %}
                                        
 
@@ -625,23 +631,23 @@
                                                 <img class="primary blur-up lazyload" data-src="{{ p.image.url }}" src="{{ p.image.url }}" alt="image" title="product" />
                                                 <!-- End Image -->
                                                 <!-- Hover Image -->
-                                                <img class="hover blur-up lazyload" data-src="{% static 'assets/images/product-images/product-image1-1.jpg' %}" src="{% static 'assets/images/product-images/product-image1-1.jpg' %}" alt="image" title="product" />
+                                                <img class="hover blur-up lazyload" data-src="{{ p.hover_image.url }}" src="{{ p.hover_image.url }}" alt="image" title="product" />
                                                 <!-- End Hover Image -->
                                                 <!-- Product Label -->
-                                                <div class="product-labels rectangular"><span class="lbl on-sale">{{ p.product_label }}</span></div>
+                                                <div class="product-labels rectangular"><span class="lbl on-sale">{{ p.categoris }}</span></div>
                                                 <!-- End Product Label -->
                                             </a>
                                             <!-- End Product Image -->
 
                                             <!-- Countdown -->
-                                            <div class="saleTime desktop" data-countdown="2022/03/01"></div>
+                                            <!-- <div class="saleTime desktop" data-countdown="2022/03/01"></div> -->
                                             <!-- End Countdown -->
 
                                             <!-- Product Button -->
                                             <div class="button-set">
-                                                <div class="quickview-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="quick view">
+                                                <!-- <div class="quickview-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="quick view">
                                                     <a href="#open-quickview-popup" class="btn quick-view-popup quick-view"><i class="icon an an-search"></i></a>
-                                                </div>
+                                                </div> -->
                                                 <div class="variants add" data-bs-toggle="tooltip" data-bs-placement="top" title="add to cart">
                                                     <form class="addtocart" action="#" method="post">
                                                         <a href="#open-addtocart-popup" class="btn cartIcon btn-addto-cart open-addtocart-popup"><i class="icon an an-shopping-bag"></i></a>
@@ -650,9 +656,9 @@
                                                 <div class="wishlist-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="add to wishlist">
                                                     <a href="#open-wishlist-popup" class="open-wishlist-popup wishlist add-to-wishlist"><i class="icon an an-heart"></i></a>
                                                 </div>
-                                                <div class="compare-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="add to compare">
+                                                <!-- <div class="compare-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="add to compare">
                                                     <a href="compare.html" class="compare add-to-compare"><i class="icon an an-random"></i></a>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <!-- End Product Button -->
                                         </div>
@@ -662,7 +668,7 @@
                                         <div class="product-details text-center">
                                             <!-- Product Name -->
                                             <div class="product-name">
-                                                <a href="{% url 'product_details' p.id %}">{{ p.product_name }}</a>
+                                                <a href="{% url 'product_details' p.id %}">{{ p.name }}</a>
                                             </div>
                                             <!-- End Product Name -->
                                             <!-- Product Price -->
@@ -672,149 +678,29 @@
                                             </div>
                                             <!-- End Product Price -->
                                             <!-- Product Review -->
-                                            <div class="product-review">
+                                            <!-- <div class="product-review">
                                                 <i class="an an-star"></i>
                                                 <i class="an an-star"></i>
                                                 <i class="an an-star"></i>
                                                 <i class="an an-star"></i>
                                                 <i class="an an-star-half-alt"></i>
-                                            </div>
+                                            </div> -->
                                             <!-- End Product Review -->
                                             <!-- Variant -->
-                                            <ul class="swatches">
+                                            <!-- <ul class="swatches">
                                                 <li class="swatch large radius"><img src="assets/images/product-images/variant1.jpg" alt="image" data-bs-toggle="tooltip" data-bs-placement="top" title="Blue" /></li>
                                                 <li class="swatch large radius"><img src="assets/images/product-images/variant1.jpg" alt="image" data-bs-toggle="tooltip" data-bs-placement="top" title="Maroon" /></li>
                                                 <li class="swatch large radius"><img src="assets/images/product-images/variant1.jpg" alt="image" data-bs-toggle="tooltip" data-bs-placement="top" title="Pink" /></li>
                                                 <li class="swatch large radius"><img src="assets/images/product-images/variant1.jpg" alt="image" data-bs-toggle="tooltip" data-bs-placement="top" title="Green" /></li>
-                                            </ul>
+                                            </ul> -->
                                             <!-- End Variant -->
                                         </div>
                                         <!-- End Product Details -->
                                         <!-- Countdown -->
-                                        <div class="timermobile"><div class="saleTime desktop" data-countdown="2022/03/01"></div></div>
+                                        <!-- <div class="timermobile"><div class="saleTime desktop" data-countdown="2022/03/01"></div></div> -->
                                         <!-- End Countdown -->
                                     </div>
                                     {% endfor %}
-                                    <div class="col-6 col-sm-6 col-md-4 col-lg-4 item grid-view-item--sold-out">
-                                        <!-- Product Image -->
-                                        <div class="product-image">
-                                            <!-- Product Image -->
-                                            <a href="product-layout1.html">
-                                                <!-- Image -->
-                                                <img class="grid-view-item__image primary blur-up lazyload" data-src="assets/images/product-images/product-image16.jpg" src="assets/images/product-images/product-image16.jpg" alt="image" title="product" />
-                                                <!-- End Image -->
-                                                <!-- Hover Image -->
-                                                <img class="grid-view-item__image hover blur-up lazyload" data-src="assets/images/product-images/product-image16-1.jpg" src="assets/images/product-images/product-image16-1.jpg" alt="image" title="product" />
-                                                <!-- End Hover Image -->
-                                                <!-- Product label -->
-                                                <div class="sold-out rectangular"><span class="lbl">Sold out</span></div>
-                                                <!-- End Product label -->
-                                            </a>
-                                            <!-- End Product Image -->
-                                            <!-- Product Button -->
-                                            <div class="button-set">
-                                                <div class="quickview-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="quick view">
-                                                    <a href="#open-quickview-popup" class="btn quick-view-popup quick-view"><i class="icon an an-search"></i></a>
-                                                </div>
-                                                <div class="variants add" data-bs-toggle="tooltip" data-bs-placement="top" title="Sold Out">
-                                                    <form class="addtocart" action="#" method="post">
-                                                        <button class="btn cartIcon btn-addto-cart soldout" type="button"><i class="icon an an-ban"></i></button>
-                                                    </form>
-                                                </div>
-                                                <div class="wishlist-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="add to wishlist">
-                                                    <a href="#open-wishlist-popup" class="open-wishlist-popup wishlist add-to-wishlist"><i class="icon an an-heart"></i></a>
-                                                </div>
-                                                <div class="compare-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="add to compare">
-                                                    <a href="compare.html" class="compare add-to-compare"><i class="icon an an-random"></i></a>
-                                                </div>
-                                            </div>
-                                            <!-- End Product Button -->
-                                        </div>
-                                        <!-- End Product Image -->
-
-                                        <!-- Product Details -->
-                                        <div class="product-details text-center">
-                                            <!-- Product Name -->
-                                            <div class="product-name">
-                                                <a href="product-layout1.html">Camelia Reversible Jacket in Navy/Blue</a>
-                                            </div>
-                                            <!-- End Product Name -->
-                                            <!-- Product Price -->
-                                            <div class="product-price">
-                                                <span class="price">$488.00</span>
-                                            </div>
-                                            <!-- End Product Price -->
-                                            <!-- Product Review -->
-                                            <div class="product-review">
-                                                <i class="an an-star"></i>
-                                                <i class="an an-star"></i>
-                                                <i class="an an-star"></i>
-                                                <i class="an an-star"></i>
-                                                <i class="an an-star"></i>
-                                            </div>
-                                            <!-- End Product Review -->
-                                        </div>
-                                        <!-- End Product Details -->
-                                    </div>
-                                    <div class="col-6 col-sm-6 col-md-4 col-lg-4 item">
-                                        <!-- Product Image -->
-                                        <div class="product-image">
-                                            <!-- Product Image -->
-                                            <a href="product-layout1.html">
-                                                <!-- Image -->
-                                                <img class="primary blur-up lazyload" data-src="assets/images/product-images/product-image17.jpg" src="assets/images/product-images/product-image17.jpg" alt="image" title="product" />
-                                                <!-- End Image -->
-                                                <!-- Hover Image -->
-                                                <img class="hover blur-up lazyload" data-src="assets/images/product-images/product-image17-1.jpg" src="assets/images/product-images/product-image17-1.jpg" alt="image" title="product" />
-                                                <!-- End Hover Image -->
-                                            </a>
-                                            <!-- End Product Image -->
-
-                                            <!-- Product Button -->
-                                            <div class="button-set">
-                                                <div class="quickview-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="quick view">
-                                                    <a href="#open-quickview-popup" class="btn quick-view-popup quick-view"><i class="icon an an-search"></i></a>
-                                                </div>
-                                                <div class="variants add" data-bs-toggle="tooltip" data-bs-placement="top" title="add to cart">
-                                                    <form class="addtocart" action="#" method="post">
-                                                        <a href="#open-addtocart-popup" class="btn cartIcon btn-addto-cart open-addtocart-popup"><i class="icon an an-shopping-bag"></i></a>
-                                                    </form>
-                                                </div>
-                                                <div class="wishlist-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="add to wishlist">
-                                                    <a href="#open-wishlist-popup" class="open-wishlist-popup wishlist add-to-wishlist"><i class="icon an an-heart"></i></a>
-                                                </div>
-                                                <div class="compare-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="add to compare">
-                                                    <a href="compare.html" class="compare add-to-compare"><i class="icon an an-random"></i></a>
-                                                </div>
-                                            </div>
-                                            <!-- End Product Button -->
-                                        </div>
-                                        <!-- End Product Image -->
-
-                                        <!-- Product Details -->
-                                        <div class="product-details text-center">
-                                            <!-- Product Name -->
-                                            <div class="product-name">
-                                                <a href="product-layout1.html">Wrinkled Tux Shirt in Navy</a>
-                                            </div>
-                                            <!-- End Product Name -->
-                                            <!-- Product Price -->
-                                            <div class="product-price">
-                                                <span class="price">$158.00</span>
-                                            </div>
-                                            <!-- End Product Price -->
-                                            <!-- Product Review -->
-                                            <div class="product-review">
-                                                <i class="an an-star"></i>
-                                                <i class="an an-star"></i>
-                                                <i class="an an-star"></i>
-                                                <i class="an an-star"></i>
-                                                <i class="an an-star-half-alt"></i>
-                                            </div>
-                                            <!-- End Product Review -->
-                                        </div>
-                                        <!-- End Product Details -->
-                                    </div>
                                 </div>
                             </div>
                             <!-- End Grid Product -->
