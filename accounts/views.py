@@ -18,12 +18,12 @@ def index(request):
     logo = SiteLogo.objects.first()
     banners = Banner.objects.all()[:4]
     categories = ProductCategory.objects.filter(parent=None)
-    for x in categories:
-        print(x)
+    posts = Post.objects.all().order_by("-id")[:3]
     context = {
         'logo': logo,
         'banners': banners,
         'categories': categories,
+        'posts': posts,
     }
     return render(request, 'index.html', context)
 
@@ -138,8 +138,10 @@ def shop(request):
 
 def product_details(request, id):
     product = Product.objects.get(id=id)
+    related_products = Product.objects.filter(categoris=product.categoris).exclude(id=id)
     context = {
         'product': product,
+        'related_products': related_products,
     }
     return render(request, 'product-details.html', context)
 

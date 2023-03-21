@@ -30,40 +30,6 @@ Ecommerce | Home
             </div>
         </div>
            {% endfor %}
-           {% comment %}
-           <div class="slide slide2 d-block">
-            <div class="slideimg blur-up lazyload bg-size">
-                <img class="blur-up lazyload bg-img" data-src="{% static 'assets/images/slideshow-banners/diva-banner2.jpg' %}" src="{% static 'assets/images/slideshow-banners/diva-banner2.jpg' %}" alt="Happy Customers" title="Happy Customers" />
-                <div class="slideshow__text-wrap slideshow__overlay classic bottom">
-                    <div class="slideshow__text-content mt-0 center">
-                        <div class="container">
-                            <div class="wrap-caption right">
-                                <h2 class="h1 mega-title slideshow__title">Happy Customers</h2>
-                                <span class="mega-subtitle slideshow__subtitle">Save up to 50% off this weekend only</span>
-                                <a href="collection-4columns.html" class="btn btn--large">Shop now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="slide slide3 d-block">
-            <div class="slideimg blur-up lazyload bg-size">
-                <img class="blur-up lazyload bg-img" data-src="{% static 'assets/images/slideshow-banners/diva-banner3.jpg' %}" src="{% static 'assets/images/slideshow-banners/diva-banner3.jpg' %}" alt="Unique Styles" title="Unique Styles" />
-                <div class="slideshow__text-wrap slideshow__overlay classic bottom">
-                    <div class="slideshow__text-content mt-0 text-shadow center">
-                        <div class="container">
-                            <div class="wrap-caption left">
-                                <h2 class="h1 mega-title slideshow__title">Unique Styles</h2>
-                                <span class="mega-subtitle slideshow__subtitle">We design and developed theme that are amazingly Unique</span>
-                                <a class="btn btn--large">Buy now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-           {% endcomment %}
         </div>
     </div>
     <!-- End Home Banner slider -->
@@ -74,7 +40,7 @@ Ecommerce | Home
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="section-header text-center">
-                        <h2 class="h2">best selling products</h2>
+                        <h2 class="h2">products</h2>
                         <p>Here you can set up to 8 tabs for your store collection.<br/>This will look perfect on all device.</p>
                     </div>
 
@@ -1138,33 +1104,6 @@ Ecommerce | Home
                     </a>
                 </div>
                 {% endfor %}
-                <!-- <div class="collection-grid-item">
-                    <img data-src="{% static 'assets/images/collection/sunglasses.jpg' %}" src="{% static 'assets/images/collection/sunglasses.jpg' %}" alt="sunglasses" class="blur-up lazyload" />
-                    <a href="collection-3columns.html" class="collection-grid-item__title-wrapper">
-                        <div class="title-wrapper">
-                            <h3 class="collection-grid-item__title">Sunglasses</h3>
-                            <span class="btn btn--secondary border-btn-1">View Collection</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="collection-grid-item">
-                    <img data-src="{% static 'assets/images/collection/bags-accessories.jpg' %}" src="{% static 'assets/images/collection/bags-accessories.jpg' %}" alt="Shop Accessories" class="blur-up lazyload" />
-                    <a href="collection-3columns.html" class="collection-grid-item__title-wrapper">
-                        <div class="title-wrapper">
-                            <h3 class="collection-grid-item__title">Bags & Accessories</h3>
-                            <span class="btn btn--secondary border-btn-1">Shop Accessories</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="collection-grid-item">
-                    <img data-src="{% static 'assets/images/collection/women-dress.jpg' %}" src="{% static 'assets/images/collection/women-dress.jpg' %}" alt="Women Dress" class="blur-up lazyload" />
-                    <a href="collection-3columns.html" class="collection-grid-item__title-wrapper">
-                        <div class="title-wrapper">
-                            <h3 class="collection-grid-item__title">Women Dress</h3>
-                            <span class="btn btn--secondary border-btn-1">Shop Dresses</span>
-                        </div>
-                    </a>
-                </div> -->
             </div>
         </div>
     </div>
@@ -1543,58 +1482,24 @@ Ecommerce | Home
             </div>
             <div class="row">
                 <!-- Item-->
+                {% for post in posts %}
                 <div class="blog-item col-12 col-sm-6 col-md-4 col-lg-4 text-start">
                     <a href="blog-single-post.html" class="article__grid-image">   
-                        <img class="blur-up lazyload" data-src="{% static 'assets/images/blog/post-img1.jpg' %}" src="{% static 'assets/images/blog/post-img1.jpg' %}" alt="blog image" />
+                        <img class="blur-up lazyload" data-src="{{ post.thumbnail.url }}" src="{{ post.thumbnail.url }}" alt="blog image" />
                     </a> 
                     <div class="wrap-blog-inner">
-                        <h3 class="h5 article__title"><a href="#">It's all about how you wear</a></h3>
+                        <h3 class="h5 article__title"><a href="#">{{ post.title }}</a></h3>
                         <span class="article__date">
-                            <time datetime="2018-02-12T09:22:00Z">February 12, 2018</time>
+                            <time datetime="{{ post.created_at|date }}">{{ post.created_at|date }}</time>
                         </span>
                         <div class="rte-setting">
-                            <p>Plusieurs variations de Lorem Ipsum peuvent être trouvées ici ou là, mais la majeure partie d'entre elles a été altérée par l'addition d'humour ou ...</p>
+                            {{ post.content|safe }}
                         </div>
-                        <a href="blog-single-post.html" class="btn btn--small border-btn-2">Read More</a>
-                        <a href="blog-single-post.html" class="btn border-btn-2 btn--small btn--link">1 comment</a>
+                        <a href="#" class="btn btn--small border-btn-2">Read More</a>
+                        <!-- <a href="#" class="btn border-btn-2 btn--small btn--link">1 comment</a> -->
                     </div>
                 </div>
-                <!--End Item-->
-
-                <!-- Item-->
-                <div class="blog-item col-12 col-sm-6 col-md-4 col-lg-4 text-start">
-                    <a href="blog-single-post.html" class="article__grid-image">   
-                        <img class="blur-up lazyload" data-src="{% static 'assets/images/blog/post-img2.jpg' %}" src="{% static 'assets/images/blog/post-img2.jpg' %}" alt="blog image" />
-                    </a> 
-                    <div class="wrap-blog-inner">
-                        <h3 class="h5 article__title"><a href="#">27 Days of Spring Fashion Recap</a></h3>
-                        <span class="article__date">
-                            <time datetime="2018-02-12T09:22:00Z">February 12, 2018</time>
-                        </span>
-                        <div class="rte-setting">
-                            <p>On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la m...</p>
-                        </div>
-                        <a href="blog-single-post.html" class="btn btn--small border-btn-2">Read More</a>
-                    </div>
-                </div>
-                <!--End Item-->
-
-                <!-- Item-->
-                <div class="blog-item col-12 col-sm-6 col-md-4 col-lg-4 text-start">
-                    <a href="blog-single-post.html" class="article__grid-image">
-                        <img class="blur-up lazyload" data-src="{% static 'assets/images/blog/post-img3.jpg' %}" src="{% static 'assets/images/blog/post-img2.jpg' %}" alt="blog image" />
-                    </a> 
-                    <div class="wrap-blog-inner">
-                        <h3 class="h5 article__title"><a href="#">Great stores. Great choices.</a></h3>
-                        <span class="article__date">
-                            <time datetime="2018-02-12T09:22:00Z">February 12, 2018</time>
-                        </span>
-                        <div class="rte-setting">
-                            <p>On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la m...</p>
-                        </div>
-                        <a href="blog-single-post.html" class="btn btn--small border-btn-2">Read More</a>
-                    </div>
-                </div>
+                {% endfor %}
                 <!--End Item-->
             </div>
         </div>
