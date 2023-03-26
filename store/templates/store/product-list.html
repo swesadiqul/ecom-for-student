@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-  
+  E-commerce | Products
 {% endblock title %}
 
 
@@ -45,31 +45,6 @@
                                         </li>
                                         {% endif %}
                                         {% endfor %}
-                                       
-
-                                        {% comment %}
-                                        <li class="level1 sub-level"><a href="#;" class="site-nav">Clothing</a>
-                                            <ul class="sublinks" style="display: none;">
-                                                <li class="level2"><a href="#" class="site-nav">Men</a></li>
-                                                <li class="level2"><a href="#" class="site-nav">Women</a></li>
-                                                <li class="level2"><a href="#" class="site-nav">Child</a></li>
-                                                <li class="level2"><a href="#" class="site-nav">View All Clothing</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="level1 sub-level"><a href="#;" class="site-nav">Jewellery</a>
-                                            <ul class="sublinks">
-                                                <li class="level2"><a href="#" class="site-nav">Ring</a></li>
-                                                <li class="level2"><a href="#" class="site-nav">Neckalses</a></li>
-                                                <li class="level2"><a href="#" class="site-nav">Eaarings</a></li>
-                                                <li class="level2"><a href="#" class="site-nav">View All Jewellery</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="lvl-1"><a href="#" class="site-nav">Shoes</a></li>
-                                        <li class="lvl-1"><a href="#" class="site-nav">Accessories</a></li>
-                                        <li class="lvl-1"><a href="#" class="site-nav">Collections</a></li>
-                                        <li class="lvl-1"><a href="#" class="site-nav">Sale</a></li>
-                                        <li class="lvl-1"><a href="#" class="site-nav">Page</a></li>
-                                        {% endcomment %}
                                     </ul>
                                 </div>
                             </div>
@@ -634,7 +609,7 @@
                                                 <img class="hover blur-up lazyload" data-src="{{ p.hover_image.url }}" src="{{ p.hover_image.url }}" alt="image" title="product" style="height: 350px;" />
                                                 <!-- End Hover Image -->
                                                 <!-- Product Label -->
-                                                <div class="product-labels rectangular"><span class="lbl on-sale">{{ p.categoris }}</span></div>
+                                                <div class="product-labels rectangular"><span class="lbl on-sale">{{ p.categories }}</span></div>
                                                 <!-- End Product Label -->
                                             </a>
                                             <!-- End Product Image -->
@@ -680,7 +655,6 @@
                                             {% else %}
                                             <div class="product-price">
                                                 <span class="price">${{ p.regular_price }}</span>
-                                                <!-- <span class="price">${{ p.discount_price }}</span> -->
                                             </div>
                                             {% endif %}
                                             

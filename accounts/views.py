@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from .forms import *
 from django.contrib.auth import login, logout, authenticate
@@ -125,26 +125,6 @@ def search(request):
     else:
         return render(request,"search.html",{})
     
-
-def shop(request):
-    categories = ProductCategory.objects.filter(parent=None)
-    products = Product.objects.all()
-    context = {
-        'categories': categories,
-        'products': products
-    }
-    return render(request, 'shops.html', context)
-
-
-def product_details(request, id):
-    product = Product.objects.get(id=id)
-    related_products = Product.objects.filter(categoris=product.categoris).exclude(id=id)
-    context = {
-        'product': product,
-        'related_products': related_products,
-    }
-    return render(request, 'product-details.html', context)
-
 
 def lookbook(request):
     return render(request, 'lookbook-3columns.html')

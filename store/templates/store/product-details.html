@@ -107,14 +107,14 @@
                                                 </div>
                                             </div>
                                             <div class="product-form__item--submit">
-                                                <button type="button" name="add"
+                                                <a href="{% url 'add_to_cart' product.pk %}" name="add"
                                                     class="btn product-form__cart-submit"><span>Add to
-                                                        cart</span></button>
+                                                        cart</span></a>
                                             </div>
                                             <div class="payment-button" data-shopify="payment-button">
-                                                <button type="button"
+                                                <a href="{% url 'add_to_cart' product.pk %}"
                                                     class="payment-button__button payment-button__button--unbranded">Buy
-                                                    it now</button>
+                                                    it now</a>
                                             </div>
                                         </div>
                                         <!-- End Product Action -->
@@ -158,75 +158,7 @@
                                 <h3 class="acor-ttl active d-block d-md-none" rel="tab1">Product Details</h3>
                                 <div id="tab1" class="tab-content py-3 py-md-0" style="display:block;">
                                     <div class="product-description rte">
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                            Lorem Ipsum has been the industry's standard dummy text ever since the
-                                            1500s, when an unknown printer took a galley of type and scrambled it to
-                                            make a type specimen book. It has survived not only five centuries, but also
-                                            the leap into electronic typesetting, remaining essentially unchanged.</p>
-                                        <ul class="checkmark my-0">
-                                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
-                                            <li>Sed ut perspiciatis unde omnis iste natus error sit</li>
-                                            <li>Neque porro quisquam est qui dolorem ipsum quia dolor</li>
-                                            <li>Lorem Ipsum is not simply random text.</li>
-                                            <li>Morbi malesuada lacus sed metus luctus pulvinar quis at odio.</li>
-                                        </ul>
-                                        <h3>Sed ut perspiciatis unde omnis iste natus error sit voluptatem</h3>
-                                        <p>Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero
-                                            are also reproduced in their exact original form, accompanied by English
-                                            versions from the 1914 translation by H. Rackham.</p>
-                                        <div class="rte__table-wrapper">
-                                            <div class="table-responsive">
-                                                <table>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td><strong>Shoulder (cm):</strong></td>
-                                                            <td>XS: 35.5 cm, S: 36.5 cm, M: 37.5 cm, L: 38.5 cm</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><strong>Bust (cm):</strong></td>
-                                                            <td>XS: 87 cm, S: 91 cm, M: 95 cm, L: 99 cm</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><strong>Sleeve Length (cm):</strong></td>
-                                                            <td>XS: 13.5 cm, S: 14.5 cm, M: 15.5 cm, L: 16.5 cm</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><strong>Length (cm):</strong></td>
-                                                            <td>XS: 59 cm, S: 60 cm, M: 61 cm, L: 62 cm</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><strong>Size Available:</strong></td>
-                                                            <td>XS, S, M, L</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><strong>Fabric:</strong></td>
-                                                            <td>Fabric has some stretch</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><strong>Season:</strong></td>
-                                                            <td>Summer</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><strong>Cuff (cm):</strong></td>
-                                                            <td>XS: 28.5 cm, S: 29.5 cm, M: 30.5 cm, L: 31.5 cm</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <h5 class="mt-4 mb-2" style="font-weight:600;">Features:</h5>
-                                        <ul class="checkmark">
-                                            <li>high quality fabric, very comfortable to touch and wear. light weight
-                                                and perfect forlayering</li>
-                                            <li>This cardigan sweater is cute for no reason,perfect for travel and
-                                                casual. with dress or t-shirt inside,Perfect match</li>
-                                            <li>It can tie in front-is forgiving to you belly or tie behind like Bow,
-                                                you can tie different ways</li>
-                                            <li>Pictures may slightly vary from actual item due to lighting and monitor.
-                                            </li>
-                                        </ul>
-                                        <h5 class="mt-4 mb-2" style="font-weight:600;">Notes:</h5>
-                                        <p>Return or exchange within 30 days from the delivered date.</p>
+                                        {{ product.details|safe }}
                                     </div>
                                 </div>
                                 <!-- End Tabs Content One -->

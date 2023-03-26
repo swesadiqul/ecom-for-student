@@ -19,8 +19,6 @@ urlpatterns = [
 #     path('faq/new/', faq_view, name='faq_new'),
     path('<pk>/update', views.UserProfileUpdateView.as_view(), name='update_profile'), 
     path('search/', views.search, name='search'), 
-    path('shop/', views.shop, name='shop'), 
-    path('product-details/<int:id>/', views.product_details, name='product_details'), 
     path('lookbook/', views.lookbook, name='lookbook'), 
 
 ]

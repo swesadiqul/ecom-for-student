@@ -44,6 +44,7 @@ class ProductCategory(models.Model):
     class Meta:
         verbose_name_plural = "Product Category"
 
+
 class Brand(models.Model):
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to='brandImg')
@@ -63,6 +64,7 @@ class Brand(models.Model):
         except IntegrityError:
             self.save(*args, **kwargs)
 
+
 class Banner(models.Model):   
     title = models.CharField(max_length=50)
     image = models.ImageField(upload_to='bannerImg')
@@ -71,6 +73,8 @@ class Banner(models.Model):
 
     def __str__(self):
         return self.title
+
+
 
 class PriceRange(models.Model):
     price_range  = models.CharField(max_length=100, unique=True)
@@ -84,8 +88,10 @@ class PriceRange(models.Model):
     def __str__(self):
         return self.price_range
 
+
+
 class Product(models.Model):
-    name = models.CharField(max_length=100)  
+    name = models.CharField(max_length=100)
     categoris = models.ForeignKey(ProductCategory, verbose_name='Product Category', on_delete=models.CASCADE, blank=True, null=True)
     image = models.ImageField(upload_to='productImg')
     hover_image = models.ImageField(upload_to="hoverProductImage", default="https://th.bing.com/th/id/OIP.oWPLGwKQFynuDWH43wlwgAHaLH?w=215&h=322&c=7&o=5&pid=1.7")
@@ -95,222 +101,56 @@ class Product(models.Model):
     stock_quantity = models.PositiveIntegerField(default=0)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, blank=True, null=True)
     
-    def saving_price(self):
-        return self.price  - self.discount_price
         
     def __str__(self):
         return self.name
 
-    class Meta:
-        ordering = ['-id']
-    
-    def save(self, *args, **kwargs):
-        try:
-            # self.slug =''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(49))
-            
-            super().save(*args, **kwargs)
-            # super().save()  # saving image first
 
-            img = Image.open(self.image.path) # Open image using self
-            
-            if img.height > 630 or img.width > 1200:
-                new_img = (700, 700)
-                img.thumbnail(new_img)
-                img.save(self.image.path)  # saving image at the same path
-        except IntegrityError:
-            self.save(*args, **kwargs)
-            
-      
-
-    # def get_absolute_url(self):
-    #     return reverse('product-detail', kwargs={'slug': self.slug})
-
-    # def get_product_update_url(self):
-    #     return reverse('product-update', kwargs={'slug': self.slug})
-
-    # def get_remove_from_cart_url(self):
-    #     return reverse('remove-form-cart', kwargs={
-    #         'slug': self.slug
-    #     })
-
-    # def get_add_to_cart_url(self):
-    #     return reverse('add-to-cart', kwargs={'slug': self.slug})
-
-    # def get_buy_now_url(self):
-    #     return reverse('buy-now', kwargs={'slug': self.slug})
+class CartProduct(models.Model): 
+    product = models.ForeignKey(Product, on_delete=models.CASCADE) 
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    ordered = models.BooleanField(default=False)
+    quantity = models.IntegerField(default=1)
 
 
-    # def get_review_list(self):
-    #     reviews = ProductReview.objects.filter(product=self,approve_status=True)
-    #     return reviews
-
-    # def get_avg_rating(self):
-    #     reviews = ProductReview.objects.filter(product=self,approve_status=True)
-    #     count = len(reviews)
-    #     sum = 0
-    #     for rvw in reviews:
-    #         sum += rvw.rating
-    #     if count != 0:
-    #         return (sum*20/count)
-
-    # def get_rating_count(self):
-    #     reviews = ProductReview.objects.filter(product=self,approve_status=True)
-    #     count = len(reviews)
-    #     return count
-
-class ProductImgGallery(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    image = models.FileField(upload_to='ProductImgGallery')
-
-    def __str__(self):
-        return self.product.slug
-
-class VariationManager(models.Manager): 
-    def all(self):
-        return super(VariationManager, self).filter(active=True)
-
-    def sizes(self):
-        return self.all().filter(category='size')
-
-    def colors(self):
-        return self.all().filter(category='color')
-
-VAR_CATEGORIES = ( 
-    ('size', 'size'), 
-    ('color', 'color'), 
-    )
-
-class Variation(models.Model): 
-    item = models.ForeignKey(Product, on_delete=models.CASCADE)
-    category = models.CharField(max_length=120, choices=VAR_CATEGORIES) 
-    title = models.CharField(max_length=120)
-    active = models.BooleanField(default=True)
-    objects = VariationManager()
-
-    def __str__(self):
-        return self.title
-
-class OrderItem(models.Model): 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE) 
-    ordered = models.BooleanField(default=False) 
-    item = models.ForeignKey(Product, on_delete=models.CASCADE) 
-    quantity = models.IntegerField(default=1) 
-    variation = models.ManyToManyField(Variation)
-  
-    def saving_price(self):
-        return (self.item.price * self.quantity) - (self.item.discount_price * self.quantity)
-
-    def saving_percent(self):
-
-        return (self.saving_price()) / (self.item.price * self.quantity) * 100
-
-    def get_subtotal(self):
-        if self.item.discount_price:
-            return self.item.discount_price * self.quantity
+    def get_total_per_product(self):
+        if self.product.discount_price:
+            return self.product.discount_price * self.quantity
         else:
-            return self.item.price * self.quantity
-
-    def get_purchase_price_subtotal(self):
-        return self.item.product_purchase_price * self.quantity
+            return self.product.regular_price * self.quantity
 
     def __str__(self):
-        return f"{self.quantity} of {self.item.product_name}"
+        return f"{self.quantity} of {self.product.name}"
 
     class Meta:
         ordering = ['-id']
 
-
-Order_Status = (
-    ('pending','pending'),
-    ('processing','processing'),
-    ('on the way','on the way'),
-    ('complete','complete'),
-    ('cancel','cancel')
-)
 
 class Order(models.Model): 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE) 
-    items = models.ManyToManyField(OrderItem)
-    ordered_date = models.DateTimeField()
-    order_complate_date = models.DateTimeField(auto_now=False, auto_now_add=False,blank=True, null=True)
-    order_status = models.CharField(max_length = 150, choices=Order_Status , default='pending')
-    total_order_amount = models.CharField(max_length = 150, blank=True, null=True)
-    paid_amount = models.CharField(max_length = 150, default=0)
-    due_amount = models.CharField(max_length = 150,default=0)
+    products = models.ManyToManyField(CartProduct)
     ordered = models.BooleanField(default=False)
-    orderId = models.CharField(max_length = 150, blank=True, null=True)
-    paymentId = models.CharField(max_length = 150, blank=True, null=True) 
-    coupon = models.ForeignKey('Coupon', on_delete=models.SET_NULL, blank=True, null=True)
-    # shipping_address = models.ForeignKey(ShipingAddress, on_delete=models.CASCADE, blank=True, null=True)
-    payment_option = models.CharField(max_length = 150)
-    order_read_status  = models.BooleanField(default=False)
-    redx_percel_traking_number  = models.CharField(max_length = 150, blank=True, null=True)
-    others_transport_trakink_url  = models.URLField(max_length = 200,blank=True, null=True)
+    ordered_date = models.DateTimeField()
     
     
     def __str__(self):
-        return self.user.username   
-
-    def get_purchase_price_total(self):
-        total = 0
-        for i in self.items.all():
-            total += i.get_purchase_price_subtotal()
-        return total
-
-    def get_total(self):
-        total = 0
-        for i in self.items.all():
-            total += i.get_subtotal()
-        return total
-
-    def get_total_sale(self):
-        total = 0
-        for i in self.items.all():
-            total += i.get_subtotal()
-        return total
-
-    def get_total_with_shiping_charge(self):
-        total = 0
-        for i in self.items.all():
-            total += i.get_subtotal()
-        if self.shipping_address.shiping_area == 'Only Chittagong District':
-            total += 50
-        elif self.shipping_address.shiping_area == 'Inside Dhaka':
-            total += 80
-        elif self.shipping_address.shiping_area == 'Outside Dhaka':
-            total += 95
-        return total
-
-    def only_shiping_charge_payment(self):
-        if self.shipping_address.shiping_area == 'Only Chittagong District':
-            total = 50
-        elif self.shipping_address.shiping_area == 'Inside Dhaka':
-            total = 80
-        elif self.shipping_address.shiping_area == 'Outside Dhaka':
-            total = 95
-        return total
-
-    def get_total_with_coupon(self):
-        total = 0
-        for i in self.items.all():
-            total += i.get_subtotal()
-        total += self.only_shiping_charge_payment()
-        total -= self.coupon.amount
-        return total
-
-    def total(self):
-        if self.coupon:
-            return self.get_total_with_coupon()
-        else:
-            return self.get_total_with_shiping_charge()
+        return self.user.email
     
-    def total_paid_amount(self):
-        return self.total() - int(self.paid_amount)
-
-
+    def get_total_all_product(self):
+        sum = 0
+        for x in self.products.all():
+            sum += x.get_total_per_product()
+        return sum
+    
+    def get_grand_total(self):
+        self.tax = 10
+        self.shipping = 0
+        total = self.get_total_all_product()  + self.tax + self.shipping
+        return total
 
     class Meta:
         ordering = ['-id']
+
 
 class Coupon(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -346,6 +186,7 @@ class WhishLIst(models.Model):
         except IntegrityError:
             self.save(*args, **kwargs)
 
+
 class FlashSale(models.Model):
     title = models.CharField(max_length = 150)  
     FlashSaleOn_date  = models.DateTimeField(default=timezone.now)
@@ -358,6 +199,7 @@ class FlashSale(models.Model):
     def __str__(self):
         return str(self.FlashSale_expire_date)
 
+
 class Campaign(models.Model):
     campaign_name = models.CharField(max_length = 150)
     
@@ -367,6 +209,7 @@ class Campaign(models.Model):
 
     def __str__(self):
         return self.campaign_name
+
 
 class CampaignProduct(models.Model):
     campaign_category  = models.ForeignKey(Campaign, on_delete=models.CASCADE)
@@ -379,6 +222,7 @@ class CampaignProduct(models.Model):
     def __str__(self):
         return self.campaign_category.campaign_name + " / " + self.product.product_name
 
+
 class DealOfTheDayProduct(models.Model):
     product  = models.ForeignKey(Product, on_delete=models.CASCADE)
      
@@ -388,6 +232,7 @@ class DealOfTheDayProduct(models.Model):
 
     def __str__(self):
         return self.product.product_name
+
 
 class ProductReview(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -437,6 +282,7 @@ class PrivacyPolicy(models.Model):
 
     def __str__(self):
         return 'Privacy Policy'
+
 
 class TermsAndConditions(models.Model):
     all_information = RichTextField()
